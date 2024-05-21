@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Tests", "OrangeBranchTaskManager.Tests\OrangeBranchTaskManager.Tests.csproj", "{AE6BED80-E258-47D2-B06A-A4D226577E62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Api", "OrangeBranchTaskManager.Api\OrangeBranchTaskManager.Api.csproj", "{8639D9C1-21FA-47CF-AB7F-B0647050DED9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE6BED80-E258-47D2-B06A-A4D226577E62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE6BED80-E258-47D2-B06A-A4D226577E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE6BED80-E258-47D2-B06A-A4D226577E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE6BED80-E258-47D2-B06A-A4D226577E62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81BC7922-9C01-4ECB-BB77-12F2CD419F91}
+	EndGlobalSection
+EndGlobal

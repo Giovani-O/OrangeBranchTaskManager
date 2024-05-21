@@ -1,0 +1,6 @@
+@OrangeBranchTaskManager.Api_HostAddress = http://localhost:5113
+
+GET {{OrangeBranchTaskManager.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
