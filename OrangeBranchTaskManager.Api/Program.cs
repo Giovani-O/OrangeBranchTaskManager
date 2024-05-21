@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using OrangeBranchTaskManager.Api.Controllers.Mappings;
 using OrangeBranchTaskManager.Api.Data;
+using OrangeBranchTaskManager.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,10 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Define a conexão
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<ITasksService, TasksService>();
+
+builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
 
 var app = builder.Build();
 
