@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -36,18 +37,14 @@ namespace OrangeBranchTaskManager.Api.Controllers
 
                 return Ok(tasks);
             }
-            catch (ArgumentNullException)
+            catch (Exception)
             {
                 return BadRequest("Erro ao buscar tarefas");
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound("Tarefas não encontradas");
             }
         }
 
         [HttpGet("id:int", Name = "GetTask")]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
