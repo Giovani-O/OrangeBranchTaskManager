@@ -84,6 +84,14 @@ public class TasksService : ITasksService
 
     public async Task<TaskDTO> DeleteTask(int id)
     {
-        throw new NotImplementedException();
+        if (id <= 0) throw new ArgumentNullException(nameof(id));
+
+        var existingTask = await _context.Tasks.FindAsync(id);
+        if (existingTask is null) throw new KeyNotFoundException();
+
+        _context.Tasks.Remove(existingTask);
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<TaskDTO>(existingTask);
     }
 }

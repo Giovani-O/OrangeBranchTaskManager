@@ -78,5 +78,27 @@ namespace OrangeBranchTaskManager.Api.Controllers
                 return NotFound("Tarefa não encontrada");
             }
         }
+
+        [HttpDelete("id:int")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteTask([FromQuery] int id)
+        {
+            try
+            {
+                await _taskService.DeleteTask(id);
+                return NoContent();
+            }
+            catch (ArgumentNullException)
+            {
+                // Tomei a liberdade de adicionar BadRequest caso dê algo errado
+                return BadRequest("Erro ao excluir a tarefa");
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Tarefa não encontrada");
+            }
+        }
     }
 }
