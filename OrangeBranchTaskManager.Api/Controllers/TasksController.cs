@@ -20,6 +20,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<IEnumerable<TaskDTO>>> GetTasks()
         {
             var tasks = await _taskService.GetTasks();
@@ -32,6 +33,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         [HttpGet("id:int", Name = "GetTask")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<TaskDTO>> GetTask(int id)
         {
             var task = await _taskService.GetById(id);
@@ -50,7 +52,31 @@ namespace OrangeBranchTaskManager.Api.Controllers
 
             if (newTask is null) return BadRequest();
 
-            return Ok(newTask);
+            return CreatedAtAction("CreateTask", newTask);
+        }
+
+        [HttpPut("id:int")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<TaskDTO>> UpdateTask([FromQuery] int id, TaskDTO taskData)
+        {
+            try
+            {
+                var updatedTask = await _taskService.UpdateTask(id, taskData);
+
+                if (updatedTask is null) return BadRequest();
+
+                return Ok(updatedTask);
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest("Erro ao atualizar a tarefa");
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Tarefa não encontrada");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrangeBranchTaskManager.Api.Data;
 using OrangeBranchTaskManager.Api.DTOs;
@@ -17,6 +18,7 @@ public class TasksService : ITasksService
         _context = context;
         _mapper = mapper;
     }
+
     public async Task<TaskDTO> GetById(int id)
     {
         if (id <= 0) throw new ArgumentNullException("id");
@@ -48,7 +50,7 @@ public class TasksService : ITasksService
     {
         if (taskData is null) throw new ArgumentNullException(nameof(taskData));
         var task = _mapper.Map<TaskModel>(taskData);
-        
+
         var addedTask = _context.Tasks.Add(task);
         await _context.SaveChangesAsync();
 
@@ -61,16 +63,23 @@ public class TasksService : ITasksService
 
     public async Task<TaskDTO> UpdateTask(int id, TaskDTO taskData)
     {
-        //if (taskData is null) throw new ArgumentNullException(nameof(taskData));
-        //if (id <= 0) throw new ArgumentNullException("id");
+        if (taskData is null) throw new ArgumentNullException(nameof(taskData));
+        if (id <= 0 || id != taskData.Id) throw new ArgumentNullException("id");
 
-        //if (id == taskData.Id)
-        //{
-        //    var taskToUpdate = _mapper.Map<TaskModel>(taskData);
+        // Busca task no banco de dados
+        var existingTask = await _context.Tasks.FindAsync(id);
+        if (existingTask is null) throw new KeyNotFoundException();
 
-        //}
+        // Mapeia dados atualizados na task existente
+        _mapper.Map(taskData, existingTask);
 
-        throw new NotImplementedException();
+        // Modifica task e confirma alteração no banco
+        _context.Entry(existingTask).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        var result = _mapper.Map<TaskDTO>(existingTask);
+
+        return result;
     }
 
     public async Task<TaskDTO> DeleteTask(int id)
