@@ -26,7 +26,7 @@ public class TasksService : ITasksService
         var task = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == id);
 
         if (task is null)
-            throw new Exception("Erro ao buscar tarefa");
+            throw new KeyNotFoundException("Tarefa não encontrada");
 
         // Mapeia de TaskModel para TaskDTO
         TaskDTO result = _mapper.Map<TaskDTO>(task);
@@ -38,8 +38,8 @@ public class TasksService : ITasksService
     {
         var tasks = await _context.Tasks.ToListAsync();
 
-        if (tasks is null)
-            throw new Exception("Erro ao buscar lista de tarefas");
+        if (tasks.Count == 0)
+            throw new Exception("Nenhuma tarefa encontrada");
 
         IEnumerable<TaskDTO> result = _mapper.Map<IEnumerable<TaskDTO>>(tasks);
 
@@ -52,9 +52,8 @@ public class TasksService : ITasksService
         var task = _mapper.Map<TaskModel>(taskData);
 
         var addedTask = _context.Tasks.Add(task);
+        if (addedTask is null) throw new DbUpdateException("Erro ao criar tarefa");
         await _context.SaveChangesAsync();
-
-        if (addedTask is null) throw new Exception("Erro ao criar tarefa");
 
         var result = _mapper.Map<TaskDTO>(addedTask.Entity);
 
