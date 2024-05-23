@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using OrangeBranchTaskManager.Api.Models;
 
 namespace OrangeBranchTaskManager.Api.Data;
@@ -24,5 +25,19 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
         {
             entity.HasKey(k => k.Id);
         });
+
+        modelBuilder.Entity<TaskModel>()
+            .Property(x => x.Title)
+            .HasMaxLength(100)
+            .IsRequired();
+
+        modelBuilder.Entity<TaskModel>()
+            .Property(x => x.Description)
+            .HasMaxLength(400)
+            .IsRequired();
+
+        modelBuilder.Entity<TaskModel>()
+            .Property(x => x.DueDate)
+            .IsRequired();
     }
 }

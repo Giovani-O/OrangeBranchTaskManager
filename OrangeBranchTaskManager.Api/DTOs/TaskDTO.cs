@@ -7,7 +7,7 @@ namespace OrangeBranchTaskManager.Api.DTOs
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 3)]
+        [StringLength(100)]
         public string? Title { get; set; }
 
         [StringLength(300)]
