@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using OrangeBranchTaskManager.Api.Controllers.Mappings;
 using OrangeBranchTaskManager.Api.Data;
 using OrangeBranchTaskManager.Api.Models;
+using OrangeBranchTaskManager.Api.Repositories;
 using OrangeBranchTaskManager.Api.Services;
 using System.Diagnostics.Metrics;
 using System.Reflection.Metadata;
@@ -79,6 +80,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddScoped<ITasksService, TasksService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
 builder.Services.AddAuthorization(options =>
 {

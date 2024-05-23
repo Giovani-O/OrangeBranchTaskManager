@@ -16,7 +16,6 @@ namespace OrangeBranchTaskManager.Api.Controllers
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
         private readonly UserManager<UserModel> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AuthenticationController(
             ITokenService tokenService, 
@@ -28,7 +27,6 @@ namespace OrangeBranchTaskManager.Api.Controllers
             _tokenService = tokenService;
             _configuration = configuration;
             _userManager = userManager;
-            _roleManager = roleManager;
         }
 
         [HttpPost("login")]
@@ -37,12 +35,9 @@ namespace OrangeBranchTaskManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginData)
         {
-            if (loginData is null || loginData.Email is null || loginData.Password is null)
-                return BadRequest("Não foi possível efetuar o login");
+            var user = await _userManager.FindByEmailAsync(loginData.Email!);
 
-            var user = await _userManager.FindByEmailAsync(loginData.Email);
-
-            if (user is not null && await _userManager.CheckPasswordAsync(user, loginData.Password))
+            if (user is not null && await _userManager.CheckPasswordAsync(user, loginData.Password!))
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -77,16 +72,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerData)
         {
-            if (
-                registerData is null || 
-                registerData.Email is null || 
-                registerData.Username is null || 
-                registerData.Password is null
-            ) 
-            { return BadRequest("Informe todos os dados!"); }
-                
-
-            var existentUser = await _userManager.FindByEmailAsync(registerData.Email);
+            var existentUser = await _userManager.FindByEmailAsync(registerData.Email!);
             if (existentUser is not null) return Conflict("Já existe um usuário com o email informado");
 
             UserModel user = new()
@@ -96,7 +82,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
                 NormalizedEmail = _userManager.NormalizeEmail(registerData.Email)
         };
 
-            var result = await _userManager.CreateAsync(user, registerData.Password);
+            var result = await _userManager.CreateAsync(user, registerData.Password!);
 
             if (!result.Succeeded) return BadRequest("Não foi possível criar usuário");
 

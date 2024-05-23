@@ -10,6 +10,7 @@ namespace OrangeBranchTaskManager.Api.DTOs
         [StringLength(100)]
         public string? Title { get; set; }
 
+        [Required]
         [StringLength(300)]
         public string? Description { get; set; }
 

@@ -5,17 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using OrangeBranchTaskManager.Api.Data;
 using OrangeBranchTaskManager.Api.DTOs;
 using OrangeBranchTaskManager.Api.Models;
+using OrangeBranchTaskManager.Api.Repositories;
 
 namespace OrangeBranchTaskManager.Api.Services;
 
 public class TasksService : ITasksService
 {
-    private readonly AppDbContext _context;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public TasksService(AppDbContext context, IMapper mapper)
+    public TasksService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
@@ -23,7 +24,7 @@ public class TasksService : ITasksService
     {
         if (id <= 0) throw new ArgumentNullException("id");
 
-        var task = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == id);
+        var task = await _unitOfWork.TaskRepository.GetByIdAsync(id);
 
         if (task is null)
             throw new KeyNotFoundException("Tarefa não encontrada");
@@ -36,9 +37,9 @@ public class TasksService : ITasksService
 
     public async Task<IEnumerable<TaskDTO>> GetTasks()
     {
-        var tasks = await _context.Tasks.ToListAsync();
+        var tasks = await _unitOfWork.TaskRepository.GetAllAsync();
 
-        if (tasks.Count == 0)
+        if (!tasks.Any())
             throw new Exception("Nenhuma tarefa encontrada");
 
         IEnumerable<TaskDTO> result = _mapper.Map<IEnumerable<TaskDTO>>(tasks);
@@ -51,11 +52,11 @@ public class TasksService : ITasksService
         if (taskData is null) throw new ArgumentNullException(nameof(taskData));
         var task = _mapper.Map<TaskModel>(taskData);
 
-        var addedTask = _context.Tasks.Add(task);
+        var addedTask = _unitOfWork.TaskRepository.CreateAsync(task);
         if (addedTask is null) throw new DbUpdateException("Erro ao criar tarefa");
-        await _context.SaveChangesAsync();
+        await _unitOfWork.CommitAsync();
 
-        var result = _mapper.Map<TaskDTO>(addedTask.Entity);
+        var result = _mapper.Map<TaskDTO>(addedTask);
 
         return result;
     }
@@ -66,15 +67,15 @@ public class TasksService : ITasksService
         if (id <= 0 || id != taskData.Id) throw new ArgumentNullException("id");
 
         // Busca task no banco de dados
-        var existingTask = await _context.Tasks.FindAsync(id);
+        var existingTask = await _unitOfWork.TaskRepository.GetByIdAsync(id);
         if (existingTask is null) throw new KeyNotFoundException();
 
         // Mapeia dados atualizados na task existente
         _mapper.Map(taskData, existingTask);
 
         // Modifica task e confirma alteração no banco
-        _context.Entry(existingTask).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
+        _unitOfWork.TaskRepository.UpdateAsync(existingTask);
+        await _unitOfWork.CommitAsync();
 
         var result = _mapper.Map<TaskDTO>(existingTask);
 
@@ -85,11 +86,11 @@ public class TasksService : ITasksService
     {
         if (id <= 0) throw new ArgumentNullException(nameof(id));
 
-        var existingTask = await _context.Tasks.FindAsync(id);
+        var existingTask = await _unitOfWork.TaskRepository.GetByIdAsync(id);
         if (existingTask is null) throw new KeyNotFoundException();
 
-        _context.Tasks.Remove(existingTask);
-        await _context.SaveChangesAsync();
+        _unitOfWork.TaskRepository.DeleteAsync(existingTask);
+        await _unitOfWork.CommitAsync();
 
         return _mapper.Map<TaskDTO>(existingTask);
     }
