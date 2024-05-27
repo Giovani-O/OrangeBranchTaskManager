@@ -100,6 +100,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:5173");
+    options.AllowAnyMethod();
+    options.AllowAnyHeader();
+});
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
