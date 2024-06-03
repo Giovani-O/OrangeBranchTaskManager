@@ -60,10 +60,21 @@ namespace OrangeBranchTaskManager.Api.Controllers
                 await _userManager.UpdateAsync(user);
 
                 var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+                var tokenExpiration = new JwtSecurityToken(jwtToken).ValidTo;
+
+                // Armazena token nos cookies
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = tokenExpiration
+                };
+                Response.Cookies.Append("token-string", jwtToken, cookieOptions);
 
                 return Ok(new {
                     Token = jwtToken,
-                    ValidTo = new JwtSecurityToken(jwtToken).ValidTo
+                    ValidTo = tokenExpiration
                 });
             }
 
