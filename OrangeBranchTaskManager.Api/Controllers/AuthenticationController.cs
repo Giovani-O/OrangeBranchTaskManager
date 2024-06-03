@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.Json;
 using OrangeBranchTaskManager.Api.DTOs;
 using OrangeBranchTaskManager.Api.Models;
 using OrangeBranchTaskManager.Api.Services;
@@ -58,8 +59,11 @@ namespace OrangeBranchTaskManager.Api.Controllers
 
                 await _userManager.UpdateAsync(user);
 
+                var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+
                 return Ok(new {
-                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Token = jwtToken,
+                    ValidTo = new JwtSecurityToken(jwtToken).ValidTo
                 });
             }
 
