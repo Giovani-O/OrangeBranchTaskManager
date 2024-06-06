@@ -117,7 +117,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
             }
         }
 
-        [HttpDelete("id:int")]
+        [HttpDelete]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
