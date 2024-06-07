@@ -42,13 +42,13 @@ namespace OrangeBranchTaskManager.Api.Controllers
             }
         }
 
-        [HttpGet("id:int", Name = "GetTask")]
+        [HttpGet("GetTask")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<TaskDTO>> GetTask(int id)
+        public async Task<ActionResult<TaskDTO>> GetTask([FromQuery] int id)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
             }
         }
 
-        [HttpPut("id:int")]
+        [HttpPut]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
