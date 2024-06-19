@@ -2,6 +2,7 @@
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
+using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Task.GetAll;
 
@@ -21,7 +22,7 @@ public class GetAllTasksUseCase
         var tasks = await _unitOfWork.TaskRepository.GetAllAsync();
 
         if (!tasks.Any())
-            throw new System.Exception(ResourceErrorMessages.ERROR_NOT_FOUND_TASKS);
+            throw new InvalidOperationException(ResourceErrorMessages.ERROR_NOT_FOUND_TASKS);
 
         IEnumerable<TaskDTO> result = _mapper.Map<IEnumerable<TaskDTO>>(tasks);
 

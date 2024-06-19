@@ -26,7 +26,7 @@ public class CreateTaskUseCase
         var task = _mapper.Map<TaskModel>(taskData);
         var addedTask = _unitOfWork.TaskRepository.CreateAsync(task);
 
-        if (addedTask is null) throw new OrangeBranchTaskManagerException(ResourceErrorMessages.ERROR_CREATE_TASK);
+        if (addedTask is null) throw new DbUpdateException(ResourceErrorMessages.ERROR_CREATE_TASK);
 
         await _unitOfWork.CommitAsync();
         var result = _mapper.Map<TaskDTO>(addedTask);

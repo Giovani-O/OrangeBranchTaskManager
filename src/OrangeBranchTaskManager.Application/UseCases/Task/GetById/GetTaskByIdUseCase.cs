@@ -25,9 +25,8 @@ public class GetTaskByIdUseCase
         var task = await _unitOfWork.TaskRepository.GetByIdAsync(id);
 
         if (task is null)
-            throw new OrangeBranchTaskManagerException(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
+            throw new InvalidOperationException(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
 
-        // Mapeia de TaskModel para TaskDTO
         TaskDTO result = _mapper.Map<TaskDTO>(task);
 
         return result;

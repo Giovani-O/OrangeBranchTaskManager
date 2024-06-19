@@ -22,16 +22,13 @@ public class UpdateTaskUseCase
     {
         Validate(taskData);
 
-        if (id <= 0 || id != taskData.Id) throw new OrangeBranchTaskManagerException(ResourceErrorMessages.UNKNOWN_ERROR);
+        if (id <= 0 || id != taskData.Id) throw new ArgumentException(ResourceErrorMessages.UNKNOWN_ERROR);
 
-        // Busca task no banco de dados
         var existingTask = await _unitOfWork.TaskRepository.GetByIdAsync(id);
-        if (existingTask is null) throw new OrangeBranchTaskManagerException(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
+        if (existingTask is null) throw new InvalidOperationException(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
 
-        // Mapeia dados atualizados na task existente
         _mapper.Map(taskData, existingTask);
 
-        // Modifica task e confirma alteração no banco
         _unitOfWork.TaskRepository.UpdateAsync(existingTask);
         await _unitOfWork.CommitAsync();
 
