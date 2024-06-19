@@ -151,6 +151,15 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O Id não pode ser vazio..
+        /// </summary>
+        public static string ERROR_EMPTY_ID {
+            get {
+                return ResourceManager.GetString("ERROR_EMPTY_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id invalido..
         /// </summary>
         public static string ERROR_INVALID_ID {
