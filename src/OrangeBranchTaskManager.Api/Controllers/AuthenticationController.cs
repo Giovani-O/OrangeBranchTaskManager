@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage.Json;
 using OrangeBranchTaskManager.Api.DTOs;
 using OrangeBranchTaskManager.Api.Models;
 using OrangeBranchTaskManager.Api.Services;
@@ -19,9 +17,9 @@ namespace OrangeBranchTaskManager.Api.Controllers
         private readonly UserManager<UserModel> _userManager;
 
         public AuthenticationController(
-            ITokenService tokenService, 
-            IConfiguration configuration, 
-            UserManager<UserModel> userManager, 
+            ITokenService tokenService,
+            IConfiguration configuration,
+            UserManager<UserModel> userManager,
             RoleManager<IdentityRole> roleManager
         )
         {
@@ -72,7 +70,8 @@ namespace OrangeBranchTaskManager.Api.Controllers
                 //};
                 //Response.Cookies.Append("token-string", jwtToken, cookieOptions);
 
-                return Ok(new {
+                return Ok(new
+                {
                     Token = jwtToken,
                     ValidTo = tokenExpiration,
                     UserName = user.UserName
@@ -96,7 +95,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
                 UserName = registerData.Username,
                 Email = registerData.Email,
                 NormalizedEmail = _userManager.NormalizeEmail(registerData.Email)
-        };
+            };
 
             var result = await _userManager.CreateAsync(user, registerData.Password!);
 

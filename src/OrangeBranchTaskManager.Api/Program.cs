@@ -9,10 +9,7 @@ using OrangeBranchTaskManager.Api.Data;
 using OrangeBranchTaskManager.Api.Models;
 using OrangeBranchTaskManager.Api.Repositories;
 using OrangeBranchTaskManager.Api.Services;
-using System.Diagnostics.Metrics;
-using System.Reflection.Metadata;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,7 +57,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Define a conexão
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
-var secretKey = builder.Configuration["Jwt:Key"] 
+var secretKey = builder.Configuration["Jwt:Key"]
     ?? throw new ArgumentException("Invalid secret key!");
 
 // habilita JWT

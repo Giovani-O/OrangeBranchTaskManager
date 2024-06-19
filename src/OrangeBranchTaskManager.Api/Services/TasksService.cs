@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OrangeBranchTaskManager.Api.Data;
 using OrangeBranchTaskManager.Api.DTOs;
 using OrangeBranchTaskManager.Api.Models;
 using OrangeBranchTaskManager.Api.Repositories;

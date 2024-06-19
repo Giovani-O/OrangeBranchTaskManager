@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OrangeBranchTaskManager.Api.DTOs;
-using OrangeBranchTaskManager.Api.Models;
+﻿using OrangeBranchTaskManager.Api.DTOs;
 
 namespace OrangeBranchTaskManager.Api.Services;
 

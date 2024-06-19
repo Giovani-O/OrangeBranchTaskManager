@@ -3,9 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Tests", "OrangeBranchTaskManager.Tests\OrangeBranchTaskManager.Tests.csproj", "{AE6BED80-E258-47D2-B06A-A4D226577E62}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A5A80253-8783-4E00-80BA-97459E523811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Api", "OrangeBranchTaskManager.Api\OrangeBranchTaskManager.Api.csproj", "{8639D9C1-21FA-47CF-AB7F-B0647050DED9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CAB5E4DA-4B87-4355-995B-2EA9B1C06C2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Tests", "tests\OrangeBranchTaskManager.Tests\OrangeBranchTaskManager.Tests.csproj", "{AE6BED80-E258-47D2-B06A-A4D226577E62}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Api", "src\OrangeBranchTaskManager.Api\OrangeBranchTaskManager.Api.csproj", "{8639D9C1-21FA-47CF-AB7F-B0647050DED9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Application", "src\OrangeBranchTaskManager.Application\OrangeBranchTaskManager.Application.csproj", "{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Communication", "src\OrangeBranchTaskManager.Communication\OrangeBranchTaskManager.Communication.csproj", "{2820C015-9474-4FEF-9314-C89C38BF9256}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Domain", "src\OrangeBranchTaskManager.Domain\OrangeBranchTaskManager.Domain.csproj", "{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Exception", "src\OrangeBranchTaskManager.Exception\OrangeBranchTaskManager.Exception.csproj", "{3667C526-1DED-4B4E-9819-261FBD0AD225}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Infrastructure", "src\OrangeBranchTaskManager.Infrastructure\OrangeBranchTaskManager.Infrastructure.csproj", "{D88E936B-CF20-4039-AE78-AB356DB63B27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +35,38 @@ Global
 		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2820C015-9474-4FEF-9314-C89C38BF9256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2820C015-9474-4FEF-9314-C89C38BF9256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2820C015-9474-4FEF-9314-C89C38BF9256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2820C015-9474-4FEF-9314-C89C38BF9256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3667C526-1DED-4B4E-9819-261FBD0AD225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3667C526-1DED-4B4E-9819-261FBD0AD225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3667C526-1DED-4B4E-9819-261FBD0AD225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3667C526-1DED-4B4E-9819-261FBD0AD225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D88E936B-CF20-4039-AE78-AB356DB63B27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D88E936B-CF20-4039-AE78-AB356DB63B27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D88E936B-CF20-4039-AE78-AB356DB63B27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D88E936B-CF20-4039-AE78-AB356DB63B27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AE6BED80-E258-47D2-B06A-A4D226577E62} = {CAB5E4DA-4B87-4355-995B-2EA9B1C06C2A}
+		{8639D9C1-21FA-47CF-AB7F-B0647050DED9} = {A5A80253-8783-4E00-80BA-97459E523811}
+		{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA} = {A5A80253-8783-4E00-80BA-97459E523811}
+		{2820C015-9474-4FEF-9314-C89C38BF9256} = {A5A80253-8783-4E00-80BA-97459E523811}
+		{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73} = {A5A80253-8783-4E00-80BA-97459E523811}
+		{3667C526-1DED-4B4E-9819-261FBD0AD225} = {A5A80253-8783-4E00-80BA-97459E523811}
+		{D88E936B-CF20-4039-AE78-AB356DB63B27} = {A5A80253-8783-4E00-80BA-97459E523811}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81BC7922-9C01-4ECB-BB77-12F2CD419F91}
