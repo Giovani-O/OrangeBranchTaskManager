@@ -6,4 +6,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrangeBranchTaskManager.Communication\OrangeBranchTaskManager.Communication.csproj" />
+    <ProjectReference Include="..\OrangeBranchTaskManager.Domain\OrangeBranchTaskManager.Domain.csproj" />
+    <ProjectReference Include="..\OrangeBranchTaskManager.Exception\OrangeBranchTaskManager.Exception.csproj" />
+    <ProjectReference Include="..\OrangeBranchTaskManager.Infrastructure\OrangeBranchTaskManager.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
