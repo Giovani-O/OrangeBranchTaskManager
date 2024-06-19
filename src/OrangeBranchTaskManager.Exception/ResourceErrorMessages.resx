@@ -135,6 +135,9 @@
   <data name="ERROR_EMAIL_ALREADY_EXISTS" xml:space="preserve">
     <value>Já existe um usuário com o email informado.</value>
   </data>
+  <data name="ERROR_INVALID_ID" xml:space="preserve">
+    <value>Id invalido.</value>
+  </data>
   <data name="ERROR_INVALID_SECRET_KEY" xml:space="preserve">
     <value>Chave secreta inválida.</value>
   </data>

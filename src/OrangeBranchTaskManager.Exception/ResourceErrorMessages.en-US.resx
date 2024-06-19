@@ -150,4 +150,7 @@
   <data name="ERROR_UPDATE_TASK" xml:space="preserve">
     <value>Error when updating the task.</value>
   </data>
+  <data name="INVALID_ID" xml:space="preserve">
+    <value>Invalid Id.</value>
+  </data>
 </root>

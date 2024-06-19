@@ -81,7 +81,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
-builder.Services.AddScoped<ITaskUseCases, TaskUseCases>();
 builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

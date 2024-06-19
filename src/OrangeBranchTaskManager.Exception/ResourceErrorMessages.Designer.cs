@@ -115,6 +115,15 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Id invalido..
+        /// </summary>
+        public static string ERROR_INVALID_ID {
+            get {
+                return ResourceManager.GetString("ERROR_INVALID_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chave secreta inválida..
         /// </summary>
         public static string ERROR_INVALID_SECRET_KEY {
