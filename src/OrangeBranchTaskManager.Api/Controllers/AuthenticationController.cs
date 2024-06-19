@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OrangeBranchTaskManager.Application.UseCases.Token;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
+using OrangeBranchTaskManager.Exception;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -78,7 +79,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerData)
         {
             var existentUser = await _userManager.FindByEmailAsync(registerData.Email!);
-            if (existentUser is not null) return Conflict("Já existe um usuário com o email informado");
+            if (existentUser is not null) return Conflict(ResourceErrorMessages.ERROR_EMAIL_ALREADY_EXISTS);
 
             UserModel user = new()
             {
@@ -89,7 +90,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
 
             var result = await _userManager.CreateAsync(user, registerData.Password!);
 
-            if (!result.Succeeded) return BadRequest("Não foi possível criar usuário");
+            if (!result.Succeeded) return BadRequest(ResourceErrorMessages.ERROR_CREATE_USER);
 
             return Ok(result);
         }

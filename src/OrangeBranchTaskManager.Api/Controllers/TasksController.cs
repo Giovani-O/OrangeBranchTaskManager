@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrangeBranchTaskManager.Application.UseCases.Task;
 using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Exception;
 
 namespace OrangeBranchTaskManager.Api.Controllers
 {
@@ -35,9 +36,9 @@ namespace OrangeBranchTaskManager.Api.Controllers
 
                 return Ok(tasks);
             }
-            catch (Exception)
+            catch (System.Exception)
             {
-                return BadRequest("Erro ao buscar tarefas");
+                return BadRequest(ResourceErrorMessages.ERROR_BAD_REQUEST_TASKS);
             }
         }
 
@@ -59,11 +60,11 @@ namespace OrangeBranchTaskManager.Api.Controllers
             }
             catch (ArgumentNullException)
             {
-                return BadRequest("Erro ao buscar tarefa");
+                return BadRequest(ResourceErrorMessages.ERROR_BAD_REQUEST_TASK);
             }
             catch (KeyNotFoundException)
             {
-                return NotFound("Tarefa não encontrada");
+                return NotFound(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
             }
         }
 
@@ -83,11 +84,11 @@ namespace OrangeBranchTaskManager.Api.Controllers
             }
             catch (ArgumentNullException)
             {
-                return BadRequest("Erro ao criar tarefa");
+                return BadRequest(ResourceErrorMessages.ERROR_BAD_REQUEST_TASK);
             }
             catch (DbUpdateException)
             {
-                return BadRequest("Erro ao salvar tarefa no banco de dados");
+                return BadRequest(ResourceErrorMessages.ERROR_SAVE_TASK_DB);
             }
         }
 
@@ -108,11 +109,11 @@ namespace OrangeBranchTaskManager.Api.Controllers
             }
             catch (ArgumentNullException)
             {
-                return BadRequest("Erro ao atualizar a tarefa");
+                return BadRequest(ResourceErrorMessages.ERROR_UPDATE_TASK);
             }
             catch (KeyNotFoundException)
             {
-                return NotFound("Tarefa não encontrada");
+                return NotFound(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
             }
         }
 
@@ -130,11 +131,11 @@ namespace OrangeBranchTaskManager.Api.Controllers
             }
             catch (ArgumentNullException)
             {
-                return BadRequest("Erro ao excluir a tarefa");
+                return BadRequest(ResourceErrorMessages.ERROR_DELETE_TASK);
             }
             catch (KeyNotFoundException)
             {
-                return NotFound("Tarefa não encontrada");
+                return NotFound(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
             }
         }
     }

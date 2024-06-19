@@ -3,6 +3,7 @@ using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using OrangeBranchTaskManager.Exception;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Task;
 
@@ -24,7 +25,7 @@ public class TaskUseCases : ITaskUseCases
         var task = await _unitOfWork.TaskRepository.GetByIdAsync(id);
 
         if (task is null)
-            throw new KeyNotFoundException("Tarefa não encontrada");
+            throw new KeyNotFoundException(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
 
         // Mapeia de TaskModel para TaskDTO
         TaskDTO result = _mapper.Map<TaskDTO>(task);
@@ -37,7 +38,7 @@ public class TaskUseCases : ITaskUseCases
         var tasks = await _unitOfWork.TaskRepository.GetAllAsync();
 
         if (!tasks.Any())
-            throw new Exception("Nenhuma tarefa encontrada");
+            throw new System.Exception(ResourceErrorMessages.ERROR_NOT_FOUND_TASKS);
 
         IEnumerable<TaskDTO> result = _mapper.Map<IEnumerable<TaskDTO>>(tasks);
 
@@ -50,7 +51,7 @@ public class TaskUseCases : ITaskUseCases
         var task = _mapper.Map<TaskModel>(taskData);
 
         var addedTask = _unitOfWork.TaskRepository.CreateAsync(task);
-        if (addedTask is null) throw new DbUpdateException("Erro ao criar tarefa");
+        if (addedTask is null) throw new DbUpdateException(ResourceErrorMessages.ERROR_CREATE_TASK);
         await _unitOfWork.CommitAsync();
 
         var result = _mapper.Map<TaskDTO>(addedTask);

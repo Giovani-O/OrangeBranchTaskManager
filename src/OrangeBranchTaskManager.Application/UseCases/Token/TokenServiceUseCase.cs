@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using OrangeBranchTaskManager.Exception;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -11,7 +12,7 @@ public class TokenServiceUseCase : ITokenServiceUseCase
     public JwtSecurityToken Execute(IEnumerable<Claim> claims, IConfiguration config)
     {
         var key = config.GetSection("JWT").GetValue<string>("Key")
-                ?? throw new InvalidOperationException("Chave secreta inválida");
+                ?? throw new InvalidOperationException(ResourceErrorMessages.ERROR_INVALID_SECRET_KEY);
 
         var privateKey = Encoding.UTF8.GetBytes(key);
 

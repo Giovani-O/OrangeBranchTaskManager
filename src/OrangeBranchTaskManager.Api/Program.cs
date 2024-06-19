@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OrangeBranchTaskManager.Api.Controllers.Mappings;
+using OrangeBranchTaskManager.Api.Middlewares;
 using OrangeBranchTaskManager.Application.UseCases.Task;
 using OrangeBranchTaskManager.Application.UseCases.Token;
 using OrangeBranchTaskManager.Domain.Entities;
@@ -98,6 +99,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<CultureMiddleware>();
 
 app.UseCors(options =>
 {
