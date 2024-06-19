@@ -6,9 +6,9 @@ using System.Text;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Token;
 
-public class GenerateAccessTokenUseCase
+public class TokenServiceUseCase : ITokenServiceUseCase
 {
-    public JwtSecurityToken GenerateAccessToken(IEnumerable<Claim> claims, IConfiguration config)
+    public JwtSecurityToken Execute(IEnumerable<Claim> claims, IConfiguration config)
     {
         var key = config.GetSection("JWT").GetValue<string>("Key")
                 ?? throw new InvalidOperationException("Chave secreta inválida");

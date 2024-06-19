@@ -1,4 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿/*
+    Create and run migration 
+ 
+    dotnet ef migrations add AddInitialMigration --startup-project .\OrangeBranchTaskManager.Api\ --project .\OrangeBranchTaskManager.Infrastructure\
+    dotnet ef database update --startup-project .\OrangeBranchTaskManager.Api\ --project .\OrangeBranchTaskManager.Infrastructure\
+ */
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OrangeBranchTaskManager.Domain.Entities;

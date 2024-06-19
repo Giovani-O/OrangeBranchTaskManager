@@ -3,24 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OrangeBranchTaskManager.Api.Data;
+using OrangeBranchTaskManager.Infrastructure.Context;
 
 #nullable disable
 
-namespace OrangeBranchTaskManager.Api.Migrations
+namespace OrangeBranchTaskManager.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240522195227_CreateDatabase")]
-    partial class CreateDatabase
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -232,7 +229,7 @@ namespace OrangeBranchTaskManager.Api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OrangeBranchTaskManager.Api.Models.TaskModel", b =>
+            modelBuilder.Entity("OrangeBranchTaskManager.Domain.Entities.TaskModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -241,8 +238,9 @@ namespace OrangeBranchTaskManager.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
@@ -257,7 +255,7 @@ namespace OrangeBranchTaskManager.Api.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("OrangeBranchTaskManager.Api.Models.UserModel", b =>
+            modelBuilder.Entity("OrangeBranchTaskManager.Domain.Entities.UserModel", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 

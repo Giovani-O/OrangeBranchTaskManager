@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OrangeBranchTaskManager.Api.DTOs;
-using OrangeBranchTaskManager.Api.Models;
-using OrangeBranchTaskManager.Api.Services;
+using OrangeBranchTaskManager.Application.UseCases.Token;
+using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -12,12 +12,12 @@ namespace OrangeBranchTaskManager.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly ITokenService _tokenService;
+        private readonly ITokenServiceUseCase _tokenService;
         private readonly IConfiguration _configuration;
         private readonly UserManager<UserModel> _userManager;
 
         public AuthenticationController(
-            ITokenService tokenService,
+            ITokenServiceUseCase tokenService,
             IConfiguration configuration,
             UserManager<UserModel> userManager,
             RoleManager<IdentityRole> roleManager
@@ -53,22 +53,12 @@ namespace OrangeBranchTaskManager.Api.Controllers
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
-                var token = _tokenService.GenerateAccessToken(authClaims, _configuration);
+                var token = _tokenService.Execute(authClaims, _configuration);
 
                 await _userManager.UpdateAsync(user);
 
                 var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
                 var tokenExpiration = new JwtSecurityToken(jwtToken).ValidTo;
-
-                // Armazena token nos cookies
-                //var cookieOptions = new CookieOptions
-                //{
-                //    HttpOnly = true,
-                //    Secure = true,
-                //    SameSite = SameSiteMode.Strict,
-                //    Expires = tokenExpiration
-                //};
-                //Response.Cookies.Append("token-string", jwtToken, cookieOptions);
 
                 return Ok(new
                 {

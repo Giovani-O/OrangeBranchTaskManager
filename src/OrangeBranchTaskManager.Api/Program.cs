@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OrangeBranchTaskManager.Api.Controllers.Mappings;
-using OrangeBranchTaskManager.Api.Data;
-using OrangeBranchTaskManager.Api.Models;
-using OrangeBranchTaskManager.Api.Repositories;
-using OrangeBranchTaskManager.Api.Services;
+using OrangeBranchTaskManager.Application.UseCases.Task;
+using OrangeBranchTaskManager.Application.UseCases.Token;
+using OrangeBranchTaskManager.Domain.Entities;
+using OrangeBranchTaskManager.Infrastructure.Context;
+using OrangeBranchTaskManager.Infrastructure.Repositories.Task;
+using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -78,8 +80,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
-builder.Services.AddScoped<ITasksService, TasksService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ITaskUseCases, TaskUseCases>();
+builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));

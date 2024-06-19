@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using OrangeBranchTaskManager.Api.DTOs;
-using OrangeBranchTaskManager.Api.Models;
+using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Domain.Entities;
+
 
 namespace OrangeBranchTaskManager.Api.Controllers.Mappings;
 

@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OrangeBranchTaskManager.Api.DTOs;
-using OrangeBranchTaskManager.Api.Services;
+using OrangeBranchTaskManager.Application.UseCases.Task;
+using OrangeBranchTaskManager.Communication.DTOs;
 
 namespace OrangeBranchTaskManager.Api.Controllers
 {
@@ -13,11 +13,11 @@ namespace OrangeBranchTaskManager.Api.Controllers
     [ApiController]
     public class TasksController : ControllerBase
     {
-        private ITasksService _taskService;
+        private ITaskUseCases _taskUseCases;
 
-        public TasksController(ITasksService taskService)
+        public TasksController(ITaskUseCases taskUseCases)
         {
-            _taskService = taskService;
+            _taskUseCases = taskUseCases;
         }
 
         [HttpGet]
@@ -29,7 +29,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         {
             try
             {
-                var tasks = await _taskService.GetTasks();
+                var tasks = await _taskUseCases.GetTasks();
 
                 if (tasks is null) return BadRequest();
 
@@ -51,7 +51,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         {
             try
             {
-                var task = await _taskService.GetById(id);
+                var task = await _taskUseCases.GetById(id);
 
                 if (task is null) return BadRequest();
 
@@ -75,7 +75,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         {
             try
             {
-                var newTask = await _taskService.CreateTask(taskData);
+                var newTask = await _taskUseCases.CreateTask(taskData);
 
                 if (newTask is null) return BadRequest();
 
@@ -100,7 +100,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         {
             try
             {
-                var updatedTask = await _taskService.UpdateTask(id, taskData);
+                var updatedTask = await _taskUseCases.UpdateTask(id, taskData);
 
                 if (updatedTask is null) return BadRequest();
 
@@ -125,7 +125,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         {
             try
             {
-                await _taskService.DeleteTask(id);
+                await _taskUseCases.DeleteTask(id);
                 return NoContent();
             }
             catch (ArgumentNullException)

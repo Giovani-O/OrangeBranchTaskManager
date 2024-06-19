@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Task;
 
-public class TaskUseCases : ITaskUseCase
+public class TaskUseCases : ITaskUseCases
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;

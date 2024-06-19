@@ -1,8 +1,7 @@
-﻿using OrangeBranchTaskManager.Api.DTOs;
+﻿using OrangeBranchTaskManager.Communication.DTOs;
 
-namespace OrangeBranchTaskManager.Api.Services;
-
-public interface ITasksService
+namespace OrangeBranchTaskManager.Application.UseCases.Task;
+public interface ITaskUseCases
 {
     Task<IEnumerable<TaskDTO>> GetTasks();
     Task<TaskDTO> GetById(int id);
