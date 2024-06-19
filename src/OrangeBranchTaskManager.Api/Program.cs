@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OrangeBranchTaskManager.Api.Controllers.Mappings;
+using OrangeBranchTaskManager.Api.Filters;
 using OrangeBranchTaskManager.Api.Middlewares;
 using OrangeBranchTaskManager.Application.UseCases.Task;
 using OrangeBranchTaskManager.Application.UseCases.Token;
@@ -89,6 +90,8 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
 });
+
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 var app = builder.Build();
 

@@ -132,6 +132,18 @@
   <data name="ERROR_DELETE_TASK" xml:space="preserve">
     <value>Erro ao excluir a tarefa.</value>
   </data>
+  <data name="ERROR_DESCRIPTION_EMPTY" xml:space="preserve">
+    <value>A descrição não pode ser vazia.</value>
+  </data>
+  <data name="ERROR_DESCRIPTION_TOO_LONG" xml:space="preserve">
+    <value>A descrição deve ter no máximo 300 caracteres.</value>
+  </data>
+  <data name="ERROR_DUE_DATE_EMPTY" xml:space="preserve">
+    <value>A data não pode estar vazia.</value>
+  </data>
+  <data name="ERROR_DUE_DATE_PAST" xml:space="preserve">
+    <value>A data não pode ser no passado.</value>
+  </data>
   <data name="ERROR_EMAIL_ALREADY_EXISTS" xml:space="preserve">
     <value>Já existe um usuário com o email informado.</value>
   </data>
@@ -150,7 +162,16 @@
   <data name="ERROR_SAVE_TASK_DB" xml:space="preserve">
     <value>Erro ao salvar tarefa no banco de dados.</value>
   </data>
+  <data name="ERROR_TITLE_EMPTY" xml:space="preserve">
+    <value>O título não pode ser vazio.</value>
+  </data>
+  <data name="ERROR_TITLE_TOO_LONG" xml:space="preserve">
+    <value>O título deve ter no máximo 100 caracteres.</value>
+  </data>
   <data name="ERROR_UPDATE_TASK" xml:space="preserve">
     <value>Erro ao atualizar a tarefa.</value>
+  </data>
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
+    <value>Erro desconhecido.</value>
   </data>
 </root>

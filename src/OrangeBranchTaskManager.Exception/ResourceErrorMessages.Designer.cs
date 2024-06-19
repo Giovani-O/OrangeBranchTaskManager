@@ -106,6 +106,42 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A descrição não pode ser vazia..
+        /// </summary>
+        public static string ERROR_DESCRIPTION_EMPTY {
+            get {
+                return ResourceManager.GetString("ERROR_DESCRIPTION_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A descrição deve ter no máximo 300 caracteres..
+        /// </summary>
+        public static string ERROR_DESCRIPTION_TOO_LONG {
+            get {
+                return ResourceManager.GetString("ERROR_DESCRIPTION_TOO_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A data não pode estar vazia..
+        /// </summary>
+        public static string ERROR_DUE_DATE_EMPTY {
+            get {
+                return ResourceManager.GetString("ERROR_DUE_DATE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A data não pode ser no passado..
+        /// </summary>
+        public static string ERROR_DUE_DATE_PAST {
+            get {
+                return ResourceManager.GetString("ERROR_DUE_DATE_PAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Já existe um usuário com o email informado..
         /// </summary>
         public static string ERROR_EMAIL_ALREADY_EXISTS {
@@ -160,11 +196,38 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O título não pode ser vazio..
+        /// </summary>
+        public static string ERROR_TITLE_EMPTY {
+            get {
+                return ResourceManager.GetString("ERROR_TITLE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O título deve ter no máximo 100 caracteres..
+        /// </summary>
+        public static string ERROR_TITLE_TOO_LONG {
+            get {
+                return ResourceManager.GetString("ERROR_TITLE_TOO_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erro ao atualizar a tarefa..
         /// </summary>
         public static string ERROR_UPDATE_TASK {
             get {
                 return ResourceManager.GetString("ERROR_UPDATE_TASK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erro desconhecido..
+        /// </summary>
+        public static string UNKNOWN_ERROR {
+            get {
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
             }
         }
     }

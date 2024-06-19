@@ -4,6 +4,7 @@ using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Task.Create;
 
@@ -20,15 +21,27 @@ public class CreateTaskUseCase
 
     public async Task<TaskDTO> Execute(TaskDTO taskData)
     {
-        if (taskData is null) throw new ArgumentNullException(nameof(taskData));
+        Validate(taskData);
+
         var task = _mapper.Map<TaskModel>(taskData);
-
         var addedTask = _unitOfWork.TaskRepository.CreateAsync(task);
-        if (addedTask is null) throw new DbUpdateException(ResourceErrorMessages.ERROR_CREATE_TASK);
+
+        if (addedTask is null) throw new OrangeBranchTaskManagerException(ResourceErrorMessages.ERROR_CREATE_TASK);
+
         await _unitOfWork.CommitAsync();
-
         var result = _mapper.Map<TaskDTO>(addedTask);
-
         return result;
+    }
+
+    private void Validate(TaskDTO request)
+    {
+        var validator = new CreateTaskValidator();
+        var result = validator.Validate(request);
+
+        if (!result.IsValid)
+        {
+            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            throw new ErrorOnValidationException(errorMessages);
+        }
     }
 }
