@@ -8,7 +8,7 @@ public record RegisterDTO
     public required string Username { get; init; }
 
     //[StringLength(100)]
-    [EmailAddress]
+    //[EmailAddress]
     public required string Email { get; init; }
 
     //[StringLength(100)]

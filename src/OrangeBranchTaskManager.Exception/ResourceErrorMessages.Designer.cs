@@ -160,6 +160,15 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O email não pode exceder 100 caracteres..
+        /// </summary>
+        public static string ERROR_EMAIL_TOO_LONG {
+            get {
+                return ResourceManager.GetString("ERROR_EMAIL_TOO_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O Id não pode ser vazio..
         /// </summary>
         public static string ERROR_EMPTY_ID {
@@ -250,6 +259,15 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A senha não pode exceder 100 caracteres..
+        /// </summary>
+        public static string ERROR_PASSWORD_TOO_LONG {
+            get {
+                return ResourceManager.GetString("ERROR_PASSWORD_TOO_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erro ao salvar tarefa no banco de dados..
         /// </summary>
         public static string ERROR_SAVE_TASK_DB {
@@ -282,6 +300,24 @@ namespace OrangeBranchTaskManager.Exception {
         public static string ERROR_UPDATE_TASK {
             get {
                 return ResourceManager.GetString("ERROR_UPDATE_TASK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O nome não pode estar vazio..
+        /// </summary>
+        public static string ERROR_USERNAME_EMPTY {
+            get {
+                return ResourceManager.GetString("ERROR_USERNAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O nome não pode exceder 100 caracteres..
+        /// </summary>
+        public static string ERROR_USERNAME_TOO_LONG {
+            get {
+                return ResourceManager.GetString("ERROR_USERNAME_TOO_LONG", resourceCulture);
             }
         }
         
