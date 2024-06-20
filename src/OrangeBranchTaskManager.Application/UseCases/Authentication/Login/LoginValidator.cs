@@ -7,8 +7,15 @@ public class LoginValidator : AbstractValidator<LoginDTO>
 {
     public LoginValidator()
     {
-        RuleFor(task => task.Email).NotEmpty().WithMessage(ResourceErrorMessages.ERROR_EMAIL_EMPTY);
-        RuleFor(task => task.Email).EmailAddress().WithMessage(ResourceErrorMessages.ERROR_INVALID_EMAIL);
-        RuleFor(task => task.Password).NotEmpty().WithMessage(ResourceErrorMessages.ERROR_PASSWORD_EMPTY);
+        RuleFor(task => task.Email)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .WithMessage(ResourceErrorMessages.ERROR_EMAIL_EMPTY)
+            .EmailAddress()
+            .WithMessage(ResourceErrorMessages.ERROR_INVALID_EMAIL);
+
+        RuleFor(task => task.Password)
+            .NotEmpty()
+            .WithMessage(ResourceErrorMessages.ERROR_PASSWORD_EMPTY);
     }
 }
