@@ -33,7 +33,12 @@ public class RegisterUseCase
 
         var existentUser = await _userManager.FindByEmailAsync(registerData.Email!);
         if (existentUser is not null) 
-            throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_EMAIL_ALREADY_EXISTS]);
+            throw new ErrorOnExecutionException(
+                new Dictionary<string, List<string>>()
+                {
+                    { nameof(RegisterDTO.Email), new List<string> { ResourceErrorMessages.ERROR_EMAIL_ALREADY_EXISTS } }
+                }
+            );
 
         UserModel user = new()
         {
@@ -44,7 +49,12 @@ public class RegisterUseCase
 
         var result = await _userManager.CreateAsync(user, registerData.Password!);
 
-        if (!result.Succeeded) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_CREATE_USER]);
+        if (!result.Succeeded) throw new ErrorOnExecutionException(
+            new Dictionary<string, List<string>>()
+            {
+                { "Error", new List<string> { ResourceErrorMessages.ERROR_CREATE_USER } }
+            }
+        );
 
         return result;
     }
@@ -56,8 +66,13 @@ public class RegisterUseCase
 
         if (!result.IsValid)
         {
-            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(errorMessages);
+            //var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            //throw new ErrorOnValidationException(errorMessages);
+            var errorDictionary = result.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
+
+            throw new ErrorOnValidationException(errorDictionary);
         }
     }
 }

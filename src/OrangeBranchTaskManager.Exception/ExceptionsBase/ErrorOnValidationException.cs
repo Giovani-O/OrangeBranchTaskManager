@@ -2,8 +2,8 @@
 
 public class ErrorOnValidationException : OrangeBranchTaskManagerException
 {
-    public List<string> Errors { get; set; }
-    public ErrorOnValidationException(List<string> errors)
+    public Dictionary<string, List<string>> Errors { get; set; }
+    public ErrorOnValidationException(Dictionary<string, List<string>> errors)
     {
         Errors = errors;
     }

@@ -25,7 +25,12 @@ public class GetTaskByIdUseCase
         var task = await _unitOfWork.TaskRepository.GetByIdAsync(id);
 
         if (task is null)
-            throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_NOT_FOUND_TASK]);
+            throw new ErrorOnExecutionException(
+                new Dictionary<string, List<string>>()
+                {
+                    { "Error", new List<string>() { ResourceErrorMessages.ERROR_NOT_FOUND_TASK } }
+                }    
+            );
 
         TaskDTO result = _mapper.Map<TaskDTO>(task);
 
@@ -39,8 +44,13 @@ public class GetTaskByIdUseCase
 
         if (!result.IsValid)
         {
-            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(errorMessages);
+            //var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            //throw new ErrorOnValidationException(errorMessages);
+            var errorDictionary = result.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
+
+            throw new ErrorOnValidationException(errorDictionary);
         }
     }
 }

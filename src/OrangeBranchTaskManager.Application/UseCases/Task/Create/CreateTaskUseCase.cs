@@ -26,7 +26,12 @@ public class CreateTaskUseCase
         var task = _mapper.Map<TaskModel>(taskData);
         var addedTask = _unitOfWork.TaskRepository.CreateAsync(task);
 
-        if (addedTask is null) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_CREATE_TASK]);
+        if (addedTask is null) throw new ErrorOnExecutionException(
+            new Dictionary<string, List<string>>()
+            {
+                { "Error", new List<string>() { ResourceErrorMessages.ERROR_CREATE_TASK } }
+            } 
+        );
 
         await _unitOfWork.CommitAsync();
         var result = _mapper.Map<TaskDTO>(addedTask);
@@ -40,8 +45,13 @@ public class CreateTaskUseCase
 
         if (!result.IsValid)
         {
-            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(errorMessages);
+            //var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            //throw new ErrorOnValidationException(errorMessages);
+            var errorDictionary = result.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
+
+            throw new ErrorOnValidationException(errorDictionary);
         }
     }
 }

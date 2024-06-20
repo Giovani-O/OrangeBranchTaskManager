@@ -2,14 +2,17 @@
 
 public class ResponseErrorDTO
 {
-    public List<string> ErrorMessages { get; set; }
+    public Dictionary<string, List<string>> ErrorMessages { get; set; }
 
     public ResponseErrorDTO(string errorMessage)
     {
-        ErrorMessages = [errorMessage];
+        ErrorMessages = new Dictionary<string, List<string>>() 
+        {
+            { "Error", new List<string> { errorMessage } }
+        };
     }
 
-    public ResponseErrorDTO(List<string> errorMessages)
+    public ResponseErrorDTO(Dictionary<string, List<string>> errorMessages)
     {
         ErrorMessages = errorMessages;
     }

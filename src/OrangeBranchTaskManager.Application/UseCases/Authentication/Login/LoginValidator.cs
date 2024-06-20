@@ -12,10 +12,13 @@ public class LoginValidator : AbstractValidator<LoginDTO>
             .NotEmpty()
             .WithMessage(ResourceErrorMessages.ERROR_EMAIL_EMPTY)
             .EmailAddress()
-            .WithMessage(ResourceErrorMessages.ERROR_INVALID_EMAIL);
+            .WithMessage(ResourceErrorMessages.ERROR_INVALID_EMAIL)
+            .WithName(nameof(LoginDTO.Email));
 
         RuleFor(task => task.Password)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
-            .WithMessage(ResourceErrorMessages.ERROR_PASSWORD_EMPTY);
+            .WithMessage(ResourceErrorMessages.ERROR_PASSWORD_EMPTY)
+            .WithName(nameof(LoginDTO.Password));
     }
 }

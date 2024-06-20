@@ -33,10 +33,20 @@ public class LoginUseCase
 
         var user = await _userManager.FindByEmailAsync(loginData.Email!);
 
-        if (user is null) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_NOT_FOUND_USER]);
+        if (user is null) throw new ErrorOnExecutionException(
+            new Dictionary<string, List<string>>() 
+            {
+                { "Error", new List<string> { ResourceErrorMessages.ERROR_NOT_FOUND_USER } }
+            }
+        );
 
         if (await _userManager.CheckPasswordAsync(user, loginData.Password) == false)
-            throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_INVALID_PASSWORD]);
+            throw new ErrorOnExecutionException(
+                new Dictionary<string, List<string>>() 
+                {
+                    { "Error", new List<string> { ResourceErrorMessages.ERROR_INVALID_PASSWORD } }
+                }
+            );
 
         var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -69,8 +79,13 @@ public class LoginUseCase
 
         if (!result.IsValid)
         {
-            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(errorMessages);
+            //var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            //throw new ErrorOnValidationException(errorMessages);
+            var errorDictionary = result.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
+
+            throw new ErrorOnValidationException(errorDictionary);
         }
     }
 

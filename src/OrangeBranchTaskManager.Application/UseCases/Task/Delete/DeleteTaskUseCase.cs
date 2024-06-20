@@ -24,7 +24,12 @@ public class DeleteTaskUseCase
         Validate(id);
 
         var existingTask = await _unitOfWork.TaskRepository.GetByIdAsync(id);
-        if (existingTask is null) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_DELETE_TASK]);
+        if (existingTask is null) throw new ErrorOnExecutionException(
+            new Dictionary<string, List<string>>()
+            {
+                { "Error", new List<string>() { ResourceErrorMessages.ERROR_DELETE_TASK } }
+            }
+        );
 
         _unitOfWork.TaskRepository.DeleteAsync(existingTask);
         await _unitOfWork.CommitAsync();
@@ -39,8 +44,13 @@ public class DeleteTaskUseCase
 
         if (!result.IsValid)
         {
-            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(errorMessages);
+            //var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            //throw new ErrorOnValidationException(errorMessages);
+            var errorDictionary = result.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
+
+            throw new ErrorOnValidationException(errorDictionary);
         }
     }
 }

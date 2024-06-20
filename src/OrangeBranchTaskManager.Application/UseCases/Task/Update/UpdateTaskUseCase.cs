@@ -22,10 +22,20 @@ public class UpdateTaskUseCase
     {
         Validate(taskData);
 
-        if (id <= 0 || id != taskData.Id) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_ID_DOESNT_MATCH]);
+        if (id <= 0 || id != taskData.Id) throw new ErrorOnExecutionException(
+            new Dictionary<string, List<string>>()
+            {
+                { nameof(TaskDTO.Id), new List<string>() { ResourceErrorMessages.ERROR_ID_DOESNT_MATCH }}
+            }    
+        );
 
         var existingTask = await _unitOfWork.TaskRepository.GetByIdAsync(id);
-        if (existingTask is null) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_NOT_FOUND_TASK]);
+        if (existingTask is null) throw new ErrorOnExecutionException(
+            new Dictionary<string, List<string>>()
+            {
+                { "Error", new List<string>() { ResourceErrorMessages.ERROR_NOT_FOUND_TASK } }
+            }    
+        );
 
         _mapper.Map(taskData, existingTask);
 
@@ -44,8 +54,13 @@ public class UpdateTaskUseCase
 
         if (!result.IsValid)
         {
-            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(errorMessages);
+            //var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            //throw new ErrorOnValidationException(errorMessages);
+            var errorDictionary = result.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
+
+            throw new ErrorOnValidationException(errorDictionary);
         }
     }
 }

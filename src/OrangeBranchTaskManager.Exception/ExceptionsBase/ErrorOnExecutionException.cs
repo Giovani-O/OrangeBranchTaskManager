@@ -2,8 +2,8 @@
 
 public class ErrorOnExecutionException : OrangeBranchTaskManagerException
 {
-    public List<string> Errors { get; set; }
-    public ErrorOnExecutionException(List<string> errors)
+    public Dictionary<string, List<string>> Errors { get; set; }
+    public ErrorOnExecutionException(Dictionary<string, List<string>> errors)
     {
         Errors = errors;
     }
