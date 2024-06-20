@@ -11,15 +11,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Api", "src\OrangeBranchTaskManager.Api\OrangeBranchTaskManager.Api.csproj", "{8639D9C1-21FA-47CF-AB7F-B0647050DED9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Application", "src\OrangeBranchTaskManager.Application\OrangeBranchTaskManager.Application.csproj", "{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Application", "src\OrangeBranchTaskManager.Application\OrangeBranchTaskManager.Application.csproj", "{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Communication", "src\OrangeBranchTaskManager.Communication\OrangeBranchTaskManager.Communication.csproj", "{2820C015-9474-4FEF-9314-C89C38BF9256}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Communication", "src\OrangeBranchTaskManager.Communication\OrangeBranchTaskManager.Communication.csproj", "{2820C015-9474-4FEF-9314-C89C38BF9256}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Domain", "src\OrangeBranchTaskManager.Domain\OrangeBranchTaskManager.Domain.csproj", "{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Domain", "src\OrangeBranchTaskManager.Domain\OrangeBranchTaskManager.Domain.csproj", "{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Exception", "src\OrangeBranchTaskManager.Exception\OrangeBranchTaskManager.Exception.csproj", "{3667C526-1DED-4B4E-9819-261FBD0AD225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Exception", "src\OrangeBranchTaskManager.Exception\OrangeBranchTaskManager.Exception.csproj", "{3667C526-1DED-4B4E-9819-261FBD0AD225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Infrastructure", "src\OrangeBranchTaskManager.Infrastructure\OrangeBranchTaskManager.Infrastructure.csproj", "{D88E936B-CF20-4039-AE78-AB356DB63B27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Infrastructure", "src\OrangeBranchTaskManager.Infrastructure\OrangeBranchTaskManager.Infrastructure.csproj", "{D88E936B-CF20-4039-AE78-AB356DB63B27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "emailMicroservice", "emailMicroservice", "{2E535F57-E2C7-43B7-9033-A88D3E2F9AD7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rabbitmqProducer", "rabbitmqProducer", "{24B93399-E39B-4D67-8BA7-E5F336226003}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Producer.Api", "rabbitmqProducer\Producer.Api\Producer.Api.csproj", "{41639E9A-B992-4A4A-969F-433320DE936C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Producer.Infrastructure", "rabbitmqProducer\Producer.Infrastructure\Producer.Infrastructure.csproj", "{2DB69799-F8D2-45CA-A322-2927FE3CE361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Producer.Application", "rabbitmqProducer\Producer.Application\Producer.Application.csproj", "{E49D39B6-EBE6-4241-86B9-2203E24F5DC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Producer.Communication", "rabbitmqProducer\Producer.Communication\Producer.Communication.csproj", "{4C50C1D3-7017-4757-BF3E-EB03EE72BA30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Producer.Exceptions", "rabbitmqProducer\Producer.Exceptions\Producer.Exceptions.csproj", "{ECF3A3EA-D133-4D5B-B1E7-41BEA799A468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +69,26 @@ Global
 		{D88E936B-CF20-4039-AE78-AB356DB63B27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D88E936B-CF20-4039-AE78-AB356DB63B27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D88E936B-CF20-4039-AE78-AB356DB63B27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41639E9A-B992-4A4A-969F-433320DE936C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41639E9A-B992-4A4A-969F-433320DE936C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41639E9A-B992-4A4A-969F-433320DE936C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41639E9A-B992-4A4A-969F-433320DE936C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB69799-F8D2-45CA-A322-2927FE3CE361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB69799-F8D2-45CA-A322-2927FE3CE361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB69799-F8D2-45CA-A322-2927FE3CE361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB69799-F8D2-45CA-A322-2927FE3CE361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E49D39B6-EBE6-4241-86B9-2203E24F5DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E49D39B6-EBE6-4241-86B9-2203E24F5DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E49D39B6-EBE6-4241-86B9-2203E24F5DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49D39B6-EBE6-4241-86B9-2203E24F5DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C50C1D3-7017-4757-BF3E-EB03EE72BA30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C50C1D3-7017-4757-BF3E-EB03EE72BA30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C50C1D3-7017-4757-BF3E-EB03EE72BA30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C50C1D3-7017-4757-BF3E-EB03EE72BA30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF3A3EA-D133-4D5B-B1E7-41BEA799A468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF3A3EA-D133-4D5B-B1E7-41BEA799A468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF3A3EA-D133-4D5B-B1E7-41BEA799A468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF3A3EA-D133-4D5B-B1E7-41BEA799A468}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +101,11 @@ Global
 		{A7B3EFF9-11D4-4D1E-81AD-E4BF4B3FDB73} = {A5A80253-8783-4E00-80BA-97459E523811}
 		{3667C526-1DED-4B4E-9819-261FBD0AD225} = {A5A80253-8783-4E00-80BA-97459E523811}
 		{D88E936B-CF20-4039-AE78-AB356DB63B27} = {A5A80253-8783-4E00-80BA-97459E523811}
+		{41639E9A-B992-4A4A-969F-433320DE936C} = {24B93399-E39B-4D67-8BA7-E5F336226003}
+		{2DB69799-F8D2-45CA-A322-2927FE3CE361} = {24B93399-E39B-4D67-8BA7-E5F336226003}
+		{E49D39B6-EBE6-4241-86B9-2203E24F5DC4} = {24B93399-E39B-4D67-8BA7-E5F336226003}
+		{4C50C1D3-7017-4757-BF3E-EB03EE72BA30} = {24B93399-E39B-4D67-8BA7-E5F336226003}
+		{ECF3A3EA-D133-4D5B-B1E7-41BEA799A468} = {24B93399-E39B-4D67-8BA7-E5F336226003}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81BC7922-9C01-4ECB-BB77-12F2CD419F91}
