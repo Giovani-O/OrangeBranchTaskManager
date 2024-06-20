@@ -36,7 +36,7 @@ public class LoginUseCase
         if (user is null) throw new ErrorOnExecutionException(
             new Dictionary<string, List<string>>() 
             {
-                { "Error", new List<string> { ResourceErrorMessages.ERROR_NOT_FOUND_USER } }
+                { nameof(LoginDTO.Email), new List<string> { ResourceErrorMessages.ERROR_NOT_FOUND_USER } }
             }
         );
 
@@ -44,7 +44,7 @@ public class LoginUseCase
             throw new ErrorOnExecutionException(
                 new Dictionary<string, List<string>>() 
                 {
-                    { "Error", new List<string> { ResourceErrorMessages.ERROR_INVALID_PASSWORD } }
+                    { nameof(LoginDTO.Password), new List<string> { ResourceErrorMessages.ERROR_INVALID_PASSWORD } }
                 }
             );
 
