@@ -8,7 +8,7 @@ using OrangeBranchTaskManager.Api.Controllers.Mappings;
 using OrangeBranchTaskManager.Api.Filters;
 using OrangeBranchTaskManager.Api.Middlewares;
 using OrangeBranchTaskManager.Application.UseCases.Task;
-using OrangeBranchTaskManager.Application.UseCases.Token;
+using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Infrastructure.Context;
 using OrangeBranchTaskManager.Infrastructure.Repositories.Task;

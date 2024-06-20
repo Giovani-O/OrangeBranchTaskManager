@@ -39,7 +39,7 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
 
         modelBuilder.Entity<TaskModel>()
             .Property(x => x.Description)
-            .HasMaxLength(400)
+            .HasMaxLength(300)
             .IsRequired();
 
         modelBuilder.Entity<TaskModel>()

@@ -6,10 +6,10 @@ public record UserDTO
 {
     public int Id { get; init; }
 
-    [StringLength(100)]
+    //[StringLength(100)]
     public required string Username { get; init; }
 
-    [StringLength(100)]
-    [EmailAddress]
+    //[StringLength(100)]
+    //[EmailAddress]
     public required string Email { get; init; }
 }

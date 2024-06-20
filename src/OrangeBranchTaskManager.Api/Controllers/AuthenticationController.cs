@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OrangeBranchTaskManager.Application.UseCases.Token;
+using OrangeBranchTaskManager.Application.UseCases.Authentication.Login;
+using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Exception;
@@ -35,41 +36,10 @@ namespace OrangeBranchTaskManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginData)
         {
-            var user = await _userManager.FindByEmailAsync(loginData.Email!);
+            var useCase = new LoginUseCase(_tokenService, _configuration, _userManager);
+            var result = await useCase.Execute(loginData);
 
-            if (user is not null && await _userManager.CheckPasswordAsync(user, loginData.Password!))
-            {
-                var userRoles = await _userManager.GetRolesAsync(user);
-
-                var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.UserName!),
-                    new Claim(ClaimTypes.Email, user.Email!),
-                    new Claim("id", user.UserName!),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                };
-
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
-
-                var token = _tokenService.Execute(authClaims, _configuration);
-
-                await _userManager.UpdateAsync(user);
-
-                var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-                var tokenExpiration = new JwtSecurityToken(jwtToken).ValidTo;
-
-                return Ok(new
-                {
-                    Token = jwtToken,
-                    ValidTo = tokenExpiration,
-                    UserName = user.UserName
-                });
-            }
-
-            return Unauthorized();
+            return Ok(result);
         }
 
         [HttpPost("register")]

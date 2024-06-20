@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace OrangeBranchTaskManager.Application.UseCases.Token;
+namespace OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 
 public class TokenServiceUseCase : ITokenServiceUseCase
 {

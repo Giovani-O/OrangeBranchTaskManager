@@ -151,6 +151,15 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O endereço de email não pode estar vazio..
+        /// </summary>
+        public static string ERROR_EMAIL_EMPTY {
+            get {
+                return ResourceManager.GetString("ERROR_EMAIL_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O Id não pode ser vazio..
         /// </summary>
         public static string ERROR_EMPTY_ID {
@@ -169,11 +178,29 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O endereço de email é inválido..
+        /// </summary>
+        public static string ERROR_INVALID_EMAIL {
+            get {
+                return ResourceManager.GetString("ERROR_INVALID_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id invalido..
         /// </summary>
         public static string ERROR_INVALID_ID {
             get {
                 return ResourceManager.GetString("ERROR_INVALID_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Senha inválida..
+        /// </summary>
+        public static string ERROR_INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("ERROR_INVALID_PASSWORD", resourceCulture);
             }
         }
         
@@ -201,6 +228,24 @@ namespace OrangeBranchTaskManager.Exception {
         public static string ERROR_NOT_FOUND_TASKS {
             get {
                 return ResourceManager.GetString("ERROR_NOT_FOUND_TASKS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuário não encontrado..
+        /// </summary>
+        public static string ERROR_NOT_FOUND_USER {
+            get {
+                return ResourceManager.GetString("ERROR_NOT_FOUND_USER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A senha não pode estar vazia..
+        /// </summary>
+        public static string ERROR_PASSWORD_EMPTY {
+            get {
+                return ResourceManager.GetString("ERROR_PASSWORD_EMPTY", resourceCulture);
             }
         }
         
