@@ -22,7 +22,7 @@ public class GetAllTasksUseCase
         var tasks = await _unitOfWork.TaskRepository.GetAllAsync();
 
         if (!tasks.Any())
-            throw new InvalidOperationException(ResourceErrorMessages.ERROR_NOT_FOUND_TASKS);
+            throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_NOT_FOUND_TASKS]);
 
         IEnumerable<TaskDTO> result = _mapper.Map<IEnumerable<TaskDTO>>(tasks);
 

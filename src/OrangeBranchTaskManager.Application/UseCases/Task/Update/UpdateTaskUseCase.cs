@@ -22,10 +22,10 @@ public class UpdateTaskUseCase
     {
         Validate(taskData);
 
-        if (id <= 0 || id != taskData.Id) throw new ArgumentException(ResourceErrorMessages.UNKNOWN_ERROR);
+        if (id <= 0 || id != taskData.Id) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_ID_DOESNT_MATCH]);
 
         var existingTask = await _unitOfWork.TaskRepository.GetByIdAsync(id);
-        if (existingTask is null) throw new InvalidOperationException(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
+        if (existingTask is null) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_NOT_FOUND_TASK]);
 
         _mapper.Map(taskData, existingTask);
 

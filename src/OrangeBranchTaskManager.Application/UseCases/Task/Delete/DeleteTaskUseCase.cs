@@ -24,7 +24,7 @@ public class DeleteTaskUseCase
         Validate(id);
 
         var existingTask = await _unitOfWork.TaskRepository.GetByIdAsync(id);
-        if (existingTask is null) throw new InvalidOperationException(ResourceErrorMessages.ERROR_DELETE_TASK);
+        if (existingTask is null) throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_DELETE_TASK]);
 
         _unitOfWork.TaskRepository.DeleteAsync(existingTask);
         await _unitOfWork.CommitAsync();

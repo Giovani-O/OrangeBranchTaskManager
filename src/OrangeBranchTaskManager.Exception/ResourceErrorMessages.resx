@@ -150,6 +150,9 @@
   <data name="ERROR_EMPTY_ID" xml:space="preserve">
     <value>O Id não pode ser vazio.</value>
   </data>
+  <data name="ERROR_ID_DOESNT_MATCH" xml:space="preserve">
+    <value>O Id informado não corresponde ao registro em questão.</value>
+  </data>
   <data name="ERROR_INVALID_ID" xml:space="preserve">
     <value>Id invalido.</value>
   </data>

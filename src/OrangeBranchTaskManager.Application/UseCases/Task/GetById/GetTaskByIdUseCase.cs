@@ -25,7 +25,7 @@ public class GetTaskByIdUseCase
         var task = await _unitOfWork.TaskRepository.GetByIdAsync(id);
 
         if (task is null)
-            throw new InvalidOperationException(ResourceErrorMessages.ERROR_NOT_FOUND_TASK);
+            throw new ErrorOnExecutionException([ResourceErrorMessages.ERROR_NOT_FOUND_TASK]);
 
         TaskDTO result = _mapper.Map<TaskDTO>(task);
 

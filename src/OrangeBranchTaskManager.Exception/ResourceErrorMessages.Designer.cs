@@ -160,6 +160,15 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O Id informado não corresponde ao registro em questão..
+        /// </summary>
+        public static string ERROR_ID_DOESNT_MATCH {
+            get {
+                return ResourceManager.GetString("ERROR_ID_DOESNT_MATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id invalido..
         /// </summary>
         public static string ERROR_INVALID_ID {
