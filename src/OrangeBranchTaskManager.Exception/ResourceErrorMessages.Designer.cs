@@ -178,6 +178,15 @@ namespace OrangeBranchTaskManager.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A mensagem está vazia..
+        /// </summary>
+        public static string ERROR_EMPTY_MESSAGE {
+            get {
+                return ResourceManager.GetString("ERROR_EMPTY_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O Id informado não corresponde ao registro em questão..
         /// </summary>
         public static string ERROR_ID_DOESNT_MATCH {
@@ -273,6 +282,15 @@ namespace OrangeBranchTaskManager.Exception {
         public static string ERROR_SAVE_TASK_DB {
             get {
                 return ResourceManager.GetString("ERROR_SAVE_TASK_DB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erro ao enviar a mensagem..
+        /// </summary>
+        public static string ERROR_SEND_MESSAGE {
+            get {
+                return ResourceManager.GetString("ERROR_SEND_MESSAGE", resourceCulture);
             }
         }
         

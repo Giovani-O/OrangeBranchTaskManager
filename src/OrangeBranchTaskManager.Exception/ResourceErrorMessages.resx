@@ -156,6 +156,9 @@
   <data name="ERROR_EMPTY_ID" xml:space="preserve">
     <value>O Id não pode ser vazio.</value>
   </data>
+  <data name="ERROR_EMPTY_MESSAGE" xml:space="preserve">
+    <value>A mensagem está vazia.</value>
+  </data>
   <data name="ERROR_ID_DOESNT_MATCH" xml:space="preserve">
     <value>O Id informado não corresponde ao registro em questão.</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="ERROR_SAVE_TASK_DB" xml:space="preserve">
     <value>Erro ao salvar tarefa no banco de dados.</value>
+  </data>
+  <data name="ERROR_SEND_MESSAGE" xml:space="preserve">
+    <value>Erro ao enviar a mensagem.</value>
   </data>
   <data name="ERROR_TITLE_EMPTY" xml:space="preserve">
     <value>O título não pode ser vazio.</value>
