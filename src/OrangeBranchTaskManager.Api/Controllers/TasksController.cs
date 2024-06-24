@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OrangeBranchTaskManager.Application.UseCases.Task.Create;
-using OrangeBranchTaskManager.Application.UseCases.Task.Delete;
-using OrangeBranchTaskManager.Application.UseCases.Task.GetAll;
-using OrangeBranchTaskManager.Application.UseCases.Task.GetById;
-using OrangeBranchTaskManager.Application.UseCases.Task.Update;
+using OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
+using OrangeBranchTaskManager.Application.UseCases.Tasks.Delete;
+using OrangeBranchTaskManager.Application.UseCases.Tasks.GetAll;
+using OrangeBranchTaskManager.Application.UseCases.Tasks.GetById;
+using OrangeBranchTaskManager.Application.UseCases.Tasks.Update;
 using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 
 namespace OrangeBranchTaskManager.Api.Controllers
@@ -18,11 +19,17 @@ namespace OrangeBranchTaskManager.Api.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IRabbitMQConnectionManager _connectionManager;
 
-        public TasksController(IUnitOfWork unitOfWork, IMapper mapper)
+        public TasksController(
+            IUnitOfWork unitOfWork, 
+            IMapper mapper, 
+            IRabbitMQConnectionManager connectionManager
+        )
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _connectionManager = connectionManager;
         }
 
         [HttpGet]
@@ -59,7 +66,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<TaskDTO>> CreateTask(TaskDTO taskData)
         {
-            var useCase = new CreateTaskUseCase(_unitOfWork, _mapper);
+            var useCase = new CreateTaskUseCase(_unitOfWork, _mapper, _connectionManager);
             var response = await useCase.Execute(taskData);
 
             return Created(string.Empty, response);
@@ -73,7 +80,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         //[ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<TaskDTO>> UpdateTask([FromQuery] int id, TaskDTO taskData)
         {
-            var useCase = new UpdateTaskUseCase(_unitOfWork, _mapper);
+            var useCase = new UpdateTaskUseCase(_unitOfWork, _mapper, _connectionManager);
             var response = await useCase.Execute(id, taskData);
 
             return Ok(response);
@@ -87,7 +94,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         //[ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteTask([FromQuery] int id)
         {
-            var useCase = new DeleteTaskUseCase(_unitOfWork, _mapper);
+            var useCase = new DeleteTaskUseCase(_unitOfWork, _mapper, _connectionManager);
             await useCase.Execute(id);
 
             return NoContent();

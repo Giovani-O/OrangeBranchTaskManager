@@ -5,6 +5,8 @@ using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
+using OrangeBranchTaskManager.Application.UseCases.SendMessage;
+using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 
@@ -12,11 +14,17 @@ public class CreateTaskUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IRabbitMQConnectionManager _connectionManager;
 
-    public CreateTaskUseCase(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateTaskUseCase(
+        IUnitOfWork unitOfWork, 
+        IMapper mapper, 
+        IRabbitMQConnectionManager connectionManager
+    )
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _connectionManager = connectionManager;
     }
 
     public async Task<TaskDTO> Execute(TaskDTO taskData)
@@ -35,6 +43,9 @@ public class CreateTaskUseCase
 
         await _unitOfWork.CommitAsync();
         var result = _mapper.Map<TaskDTO>(addedTask);
+
+        await SendMessage();
+
         return result;
     }
 
@@ -53,5 +64,17 @@ public class CreateTaskUseCase
 
             throw new ErrorOnValidationException(errorDictionary);
         }
+    }
+
+    private async Task SendMessage()
+    {
+        var message = new SendMessageDTO
+        {
+            Message = "Tarefa criada"
+        };
+
+        var sendMessageUseCase = new SendMessageUseCase(_connectionManager);
+
+        await sendMessageUseCase.Execute(message);
     }
 }

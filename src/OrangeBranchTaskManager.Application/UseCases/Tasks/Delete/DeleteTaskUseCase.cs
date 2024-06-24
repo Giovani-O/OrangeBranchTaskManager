@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
+using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Delete;
@@ -10,11 +12,17 @@ public class DeleteTaskUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IRabbitMQConnectionManager _connectionManager;
 
-    public DeleteTaskUseCase(IUnitOfWork unitOfWork, IMapper mapper)
+    public DeleteTaskUseCase(
+        IUnitOfWork unitOfWork, 
+        IMapper mapper, 
+        IRabbitMQConnectionManager connectionManager
+    )
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _connectionManager = connectionManager;
     }
 
     public async Task<TaskDTO> Execute(int id)
@@ -31,6 +39,8 @@ public class DeleteTaskUseCase
 
         _unitOfWork.TaskRepository.DeleteAsync(existingTask);
         await _unitOfWork.CommitAsync();
+
+        await SendMessage();
 
         return _mapper.Map<TaskDTO>(existingTask);
     }
@@ -50,5 +60,17 @@ public class DeleteTaskUseCase
 
             throw new ErrorOnValidationException(errorDictionary);
         }
+    }
+
+    private async Task SendMessage()
+    {
+        var message = new SendMessageDTO
+        {
+            Message = "Tarefa excluída"
+        };
+
+        var sendMessageUseCase = new SendMessageUseCase(_connectionManager);
+
+        await sendMessageUseCase.Execute(message);
     }
 }

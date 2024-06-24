@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
+using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Update;
@@ -10,11 +12,17 @@ public class UpdateTaskUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IRabbitMQConnectionManager _connectionManager;
 
-    public UpdateTaskUseCase(IUnitOfWork unitOfWork, IMapper mapper)
+    public UpdateTaskUseCase(
+        IUnitOfWork unitOfWork, 
+        IMapper mapper, 
+        IRabbitMQConnectionManager connectionManager
+    )
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _connectionManager = connectionManager;
     }
 
     public async Task<TaskDTO> Execute(int id, TaskDTO taskData)
@@ -43,6 +51,8 @@ public class UpdateTaskUseCase
 
         var result = _mapper.Map<TaskDTO>(existingTask);
 
+        await SendMessage();
+
         return result;
     }
 
@@ -61,5 +71,17 @@ public class UpdateTaskUseCase
 
             throw new ErrorOnValidationException(errorDictionary);
         }
+    }
+
+    private async Task SendMessage()
+    {
+        var message = new SendMessageDTO
+        {
+            Message = "Tarefa atualizada"
+        };
+
+        var sendMessageUseCase = new SendMessageUseCase(_connectionManager);
+
+        await sendMessageUseCase.Execute(message);
     }
 }

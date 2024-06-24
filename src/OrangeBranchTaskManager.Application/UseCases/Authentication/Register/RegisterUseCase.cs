@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using OrangeBranchTaskManager.Application.UseCases.Authentication.Login;
+using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
+using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Authentication.Register;
 public class RegisterUseCase
@@ -14,17 +16,20 @@ public class RegisterUseCase
     private readonly ITokenServiceUseCase _tokenService;
     private readonly IConfiguration _configuration;
     private readonly UserManager<UserModel> _userManager;
+    private readonly IRabbitMQConnectionManager _connectionManager;
 
     public RegisterUseCase(
         ITokenServiceUseCase tokenService,
         IConfiguration configuration,
-        UserManager<UserModel> userManager
+        UserManager<UserModel> userManager,
+        IRabbitMQConnectionManager connectionManager
         //RoleManager<IdentityRole> roleManager
     )
     {
         _tokenService = tokenService;
         _configuration = configuration;
         _userManager = userManager;
+        _connectionManager = connectionManager;
     }
 
     public async Task<IdentityResult> Execute(RegisterDTO registerData)
@@ -56,6 +61,8 @@ public class RegisterUseCase
             }
         );
 
+        await SendMessage();
+
         return result;
     }
 
@@ -74,5 +81,17 @@ public class RegisterUseCase
 
             throw new ErrorOnValidationException(errorDictionary);
         }
+    }
+
+    private async Task SendMessage()
+    {
+        var message = new SendMessageDTO
+        {
+            Message = "Usuário registrado"
+        };
+
+        var sendMessageUseCase = new SendMessageUseCase(_connectionManager);
+
+        await sendMessageUseCase.Execute(message);
     }
 }
