@@ -8,7 +8,7 @@ using OrangeBranchTaskManager.Application.UseCases.Tasks.GetAll;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.GetById;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.Update;
 using OrangeBranchTaskManager.Communication.DTOs;
-using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 
 namespace OrangeBranchTaskManager.Api.Controllers

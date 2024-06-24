@@ -10,7 +10,7 @@ using OrangeBranchTaskManager.Api.Middlewares;
 using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Infrastructure.Context;
-using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Infrastructure.Repositories.Task;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 using System.Text;

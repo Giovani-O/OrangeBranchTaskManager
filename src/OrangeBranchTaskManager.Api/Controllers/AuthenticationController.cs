@@ -5,7 +5,7 @@ using OrangeBranchTaskManager.Application.UseCases.Authentication.Register;
 using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
-using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 
 namespace OrangeBranchTaskManager.Api.Controllers
 {

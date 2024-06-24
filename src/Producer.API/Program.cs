@@ -1,4 +1,4 @@
-using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using Producer.Api.Filters;
 
 var builder = WebApplication.CreateBuilder(args);

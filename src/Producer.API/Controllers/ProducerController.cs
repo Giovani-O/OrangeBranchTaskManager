@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
-using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using System.Text;
 
 namespace Producer.Api.Controllers;
