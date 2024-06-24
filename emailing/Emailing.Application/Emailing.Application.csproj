@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Emailing.Communication\Emailing.Communication.csproj" />
+    <ProjectReference Include="..\Emailing.Domain\Emailing.Domain.csproj" />
+    <ProjectReference Include="..\Emailing.Exception\Emailing.Exception.csproj" />
+  </ItemGroup>
+
+</Project>
