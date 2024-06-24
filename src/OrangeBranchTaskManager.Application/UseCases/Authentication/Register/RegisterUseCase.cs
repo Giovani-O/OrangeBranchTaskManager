@@ -8,7 +8,7 @@ using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
-using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Authentication.Register;
 public class RegisterUseCase

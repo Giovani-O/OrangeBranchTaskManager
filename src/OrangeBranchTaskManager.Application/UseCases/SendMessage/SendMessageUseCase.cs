@@ -1,4 +1,4 @@
-﻿using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+﻿using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
 using System.Threading.Tasks;

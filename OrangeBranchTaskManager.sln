@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emailing.Domain", "emailing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emailing.Exception", "emailing\Emailing.Exception\Emailing.Exception.csproj", "{50134742-30E8-45E3-AEE0-731A11FC8D16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emailing.Infrastructure", "emailing\Emailing.Infrastructure\Emailing.Infrastructure.csproj", "{1413E2E2-FD44-4BD9-A851-55B8E7766A03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{50134742-30E8-45E3-AEE0-731A11FC8D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50134742-30E8-45E3-AEE0-731A11FC8D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50134742-30E8-45E3-AEE0-731A11FC8D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1413E2E2-FD44-4BD9-A851-55B8E7766A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1413E2E2-FD44-4BD9-A851-55B8E7766A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1413E2E2-FD44-4BD9-A851-55B8E7766A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1413E2E2-FD44-4BD9-A851-55B8E7766A03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{5E896119-E704-44D0-89B1-9E28A1EC29FF} = {2E535F57-E2C7-43B7-9033-A88D3E2F9AD7}
 		{CB6B3FD6-9490-4C5B-9676-4E9E8005FF83} = {2E535F57-E2C7-43B7-9033-A88D3E2F9AD7}
 		{50134742-30E8-45E3-AEE0-731A11FC8D16} = {2E535F57-E2C7-43B7-9033-A88D3E2F9AD7}
+		{1413E2E2-FD44-4BD9-A851-55B8E7766A03} = {2E535F57-E2C7-43B7-9033-A88D3E2F9AD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81BC7922-9C01-4ECB-BB77-12F2CD419F91}

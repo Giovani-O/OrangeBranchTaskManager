@@ -6,7 +6,7 @@ using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
 using OrangeBranchTaskManager.Application.UseCases.SendMessage;
-using OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 

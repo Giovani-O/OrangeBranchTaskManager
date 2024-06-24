@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+namespace Emailing.Domain.RabbitMQConnectionManager;
 public interface IRabbitMQConnectionManager
 {
     IModel GetChannel();

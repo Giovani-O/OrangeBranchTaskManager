@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace OrangeBranchTaskManager.Infrastructure.RabbitMQConnectionManager;
+namespace OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 public class RabbitMQConnectionManager : IRabbitMQConnectionManager
 {
     private readonly ConnectionFactory _factory;
