@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
-using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
-using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Delete;
 
@@ -15,8 +15,8 @@ public class DeleteTaskUseCase
     private readonly IRabbitMQConnectionManager _connectionManager;
 
     public DeleteTaskUseCase(
-        IUnitOfWork unitOfWork, 
-        IMapper mapper, 
+        IUnitOfWork unitOfWork,
+        IMapper mapper,
         IRabbitMQConnectionManager connectionManager
     )
     {

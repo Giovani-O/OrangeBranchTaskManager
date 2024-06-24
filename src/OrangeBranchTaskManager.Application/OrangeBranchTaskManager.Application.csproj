@@ -19,7 +19,6 @@
     <ProjectReference Include="..\OrangeBranchTaskManager.Communication\OrangeBranchTaskManager.Communication.csproj" />
     <ProjectReference Include="..\OrangeBranchTaskManager.Domain\OrangeBranchTaskManager.Domain.csproj" />
     <ProjectReference Include="..\OrangeBranchTaskManager.Exception\OrangeBranchTaskManager.Exception.csproj" />
-    <ProjectReference Include="..\OrangeBranchTaskManager.Infrastructure\OrangeBranchTaskManager.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

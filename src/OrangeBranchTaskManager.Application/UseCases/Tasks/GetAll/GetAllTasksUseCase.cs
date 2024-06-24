@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception;
-using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.GetAll;

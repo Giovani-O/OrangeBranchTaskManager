@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
+using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
-using OrangeBranchTaskManager.Exception;
-using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
-using Microsoft.EntityFrameworkCore;
-using OrangeBranchTaskManager.Exception.ExceptionsBase;
-using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Domain.UnitOfWork;
+using OrangeBranchTaskManager.Exception;
+using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 
@@ -17,8 +16,8 @@ public class CreateTaskUseCase
     private readonly IRabbitMQConnectionManager _connectionManager;
 
     public CreateTaskUseCase(
-        IUnitOfWork unitOfWork, 
-        IMapper mapper, 
+        IUnitOfWork unitOfWork,
+        IMapper mapper,
         IRabbitMQConnectionManager connectionManager
     )
     {

@@ -1,6 +1,6 @@
 ﻿using OrangeBranchTaskManager.Domain.Entities;
 
-namespace OrangeBranchTaskManager.Infrastructure.Repositories.Task;
+namespace OrangeBranchTaskManager.Domain.Repositories.Tasks;
 public interface ITaskRepository : IRepository<TaskModel>
 {
 

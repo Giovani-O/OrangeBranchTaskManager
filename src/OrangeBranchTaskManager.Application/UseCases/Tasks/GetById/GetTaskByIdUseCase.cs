@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
-using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.GetById;
 

@@ -9,7 +9,7 @@ using OrangeBranchTaskManager.Application.UseCases.Tasks.GetById;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.Update;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
-using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
+using OrangeBranchTaskManager.Domain.UnitOfWork;
 
 namespace OrangeBranchTaskManager.Api.Controllers
 {
