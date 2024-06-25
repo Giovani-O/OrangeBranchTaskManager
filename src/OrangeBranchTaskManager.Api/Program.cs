@@ -12,6 +12,7 @@ using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Domain.Repositories.Tasks;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
+using OrangeBranchTaskManager.Infrastructure;
 using OrangeBranchTaskManager.Infrastructure.Context;
 using OrangeBranchTaskManager.Infrastructure.Repositories.Task;
 using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
@@ -84,9 +85,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
+builder.Services.AddInfrastructure();
 builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
-builder.Services.AddScoped<ITaskRepository, TaskRepository>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IRabbitMQConnectionManager, RabbitMQConnectionManager>();
 builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
 builder.Services.AddAuthorization(options =>

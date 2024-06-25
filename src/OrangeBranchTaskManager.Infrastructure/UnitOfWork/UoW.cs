@@ -5,12 +5,12 @@ using OrangeBranchTaskManager.Infrastructure.Repositories.Task;
 
 namespace OrangeBranchTaskManager.Infrastructure.UnitOfWork;
 
-public class UnitOfWork : IUnitOfWork
+internal class UoW : IUnitOfWork
 {
     private ITaskRepository? _taskRepository;
     public AppDbContext _context;
 
-    public UnitOfWork(AppDbContext context)
+    public UoW(AppDbContext context)
     {
         _context = context;
     }
