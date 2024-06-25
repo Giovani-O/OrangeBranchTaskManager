@@ -27,6 +27,6 @@ public class RabbitMQConnectionManager : IRabbitMQConnectionManager
 
     public IModel GetChannel()
     {
-        throw new NotImplementedException();
+        return _channel;
     }
 }

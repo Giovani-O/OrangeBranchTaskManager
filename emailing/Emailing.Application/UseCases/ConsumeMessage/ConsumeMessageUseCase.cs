@@ -23,7 +23,7 @@ public class ConsumeMessageUseCase
         {
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
-            Console.WriteLine(message);
+            Console.WriteLine($"[!] New message: {message}");
         };
 
         channel.BasicConsume(

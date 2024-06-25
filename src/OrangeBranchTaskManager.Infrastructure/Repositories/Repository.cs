@@ -4,7 +4,7 @@ using OrangeBranchTaskManager.Infrastructure.Context;
 
 namespace OrangeBranchTaskManager.Infrastructure.Repositories;
 
-public class Repository<T> : IRepository<T> where T : class
+internal class Repository<T> : IRepository<T> where T : class
 {
     protected readonly AppDbContext _context;
 
