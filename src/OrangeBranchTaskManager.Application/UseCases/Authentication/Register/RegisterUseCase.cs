@@ -9,6 +9,9 @@ using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
+using OrangeBranchTaskManager.Communication.Templates;
+using System.Text;
+using System.Text.Json;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Authentication.Register;
 public class RegisterUseCase
@@ -61,7 +64,7 @@ public class RegisterUseCase
             }
         );
 
-        await SendMessage();
+        await SendMessage(registerData.Username);
 
         return result;
     }
@@ -83,11 +86,19 @@ public class RegisterUseCase
         }
     }
 
-    private async Task SendMessage()
+    private async Task SendMessage(string username)
     {
+        var messageInfo = new EmailTemplate 
+        { 
+            NotificationType = Domain.Enums.NotificationType.NewUser,
+            Username = username,
+        };
+
+        var messageJson = JsonSerializer.Serialize(messageInfo);
+
         var message = new SendMessageDTO
         {
-            Message = "Usuário registrado"
+            Message = messageJson
         };
 
         var sendMessageUseCase = new SendMessageUseCase(_connectionManager);

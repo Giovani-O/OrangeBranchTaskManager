@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Communication.Templates;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 
@@ -43,7 +46,7 @@ public class CreateTaskUseCase
         await _unitOfWork.CommitAsync();
         var result = _mapper.Map<TaskDTO>(addedTask);
 
-        await SendMessage();
+        await SendMessage(taskData);
 
         return result;
     }
@@ -65,11 +68,22 @@ public class CreateTaskUseCase
         }
     }
 
-    private async Task SendMessage()
+    private async Task SendMessage(TaskDTO task)
     {
+        var messageInfo = new EmailTemplate
+        {
+            NotificationType = Domain.Enums.NotificationType.NewTask,
+            Username = "",
+            TaskTitle = task.Title,
+            TaskDescription = task.Description,
+            TaskDeadline = task.DueDate,
+        };
+
+        var messageJson = JsonSerializer.Serialize(messageInfo);
+
         var message = new SendMessageDTO
         {
-            Message = "Tarefa criada"
+            Message = messageJson
         };
 
         var sendMessageUseCase = new SendMessageUseCase(_connectionManager);

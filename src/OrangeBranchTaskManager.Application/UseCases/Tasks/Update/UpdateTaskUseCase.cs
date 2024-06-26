@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Communication.Templates;
+using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
+using System.Text.Json;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Update;
 
@@ -51,7 +54,7 @@ public class UpdateTaskUseCase
 
         var result = _mapper.Map<TaskDTO>(existingTask);
 
-        await SendMessage();
+        await SendMessage(taskData);
 
         return result;
     }
@@ -63,8 +66,6 @@ public class UpdateTaskUseCase
 
         if (!result.IsValid)
         {
-            //var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-            //throw new ErrorOnValidationException(errorMessages);
             var errorDictionary = result.Errors
                 .GroupBy(e => e.PropertyName)
                 .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
@@ -73,11 +74,22 @@ public class UpdateTaskUseCase
         }
     }
 
-    private async Task SendMessage()
+    private async Task SendMessage(TaskDTO task)
     {
+        var messageInfo = new EmailTemplate
+        {
+            NotificationType = Domain.Enums.NotificationType.UpdatedTask,
+            Username = "",
+            TaskTitle = task.Title,
+            TaskDescription = task.Description,
+            TaskDeadline = task.DueDate,
+        };
+
+        var messageJson = JsonSerializer.Serialize(messageInfo);
+
         var message = new SendMessageDTO
         {
-            Message = "Tarefa atualizada"
+            Message = messageJson
         };
 
         var sendMessageUseCase = new SendMessageUseCase(_connectionManager);

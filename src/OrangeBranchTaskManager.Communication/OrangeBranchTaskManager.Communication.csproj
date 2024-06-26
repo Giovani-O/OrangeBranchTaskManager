@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OrangeBranchTaskManager.Domain\OrangeBranchTaskManager.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

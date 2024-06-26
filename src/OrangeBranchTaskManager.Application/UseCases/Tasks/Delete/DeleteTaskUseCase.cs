@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
+using OrangeBranchTaskManager.Communication.Templates;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Delete;
 
@@ -40,7 +43,7 @@ public class DeleteTaskUseCase
         _unitOfWork.TaskRepository.DeleteAsync(existingTask);
         await _unitOfWork.CommitAsync();
 
-        await SendMessage();
+        await SendMessage(existingTask.Title!);
 
         return _mapper.Map<TaskDTO>(existingTask);
     }
@@ -62,11 +65,20 @@ public class DeleteTaskUseCase
         }
     }
 
-    private async Task SendMessage()
+    private async Task SendMessage(string taskTitle)
     {
+        var messageInfo = new EmailTemplate
+        {
+            NotificationType = Domain.Enums.NotificationType.DeletedTask,
+            Username = "",
+            TaskTitle = taskTitle
+        };
+
+        var messageJson = JsonSerializer.Serialize(messageInfo);
+
         var message = new SendMessageDTO
         {
-            Message = "Tarefa excluída"
+            Message = messageJson
         };
 
         var sendMessageUseCase = new SendMessageUseCase(_connectionManager);
