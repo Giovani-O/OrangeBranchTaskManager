@@ -12,7 +12,7 @@ using OrangeBranchTaskManager.Domain.Entities;
 
 namespace OrangeBranchTaskManager.Infrastructure.Context;
 
-public class AppDbContext : IdentityDbContext<IdentityUser>
+internal class AppDbContext : IdentityDbContext<IdentityUser>
 {
     // Passa options para o construtor de DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)

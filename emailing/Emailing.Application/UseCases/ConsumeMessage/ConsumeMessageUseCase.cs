@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Emailing.Application.UseCases.ConsumeMessage;
 
-public class ConsumeMessageUseCase
+public class ConsumeMessageUseCase : IConsumeMessageUseCase
 {
     private readonly IRabbitMQConnectionManager _connectionManager;
 

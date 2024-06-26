@@ -54,38 +54,7 @@ builder.Services.AddSwaggerGen(c =>
                 });
 });
 
-// Registra UserModel na identity
-builder.Services.AddIdentity<UserModel, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
-
-// Conection String pode mudar dependendo do seu ambiente, altere em appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-// Define a conexão
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
-
-var secretKey = builder.Configuration["Jwt:Key"]
-    ?? throw new ArgumentException("Invalid secret key!");
-
-// habilita JWT
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
-        };
-    });
-
-builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
-
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
 builder.Services.AddScoped<IRabbitMQConnectionManager, RabbitMQConnectionManager>();
 builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
