@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using OrangeBranchTaskManager.Api.Controllers.Mappings;
 using OrangeBranchTaskManager.Api.Filters;
 using OrangeBranchTaskManager.Api.Middlewares;
+using OrangeBranchTaskManager.Application.UseCases.CurrentUser;
 using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
@@ -57,6 +58,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
 builder.Services.AddScoped<IRabbitMQConnectionManager, RabbitMQConnectionManager>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
 builder.Services.AddAuthorization(options =>
 {

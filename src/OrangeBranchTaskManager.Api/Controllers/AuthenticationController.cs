@@ -22,7 +22,6 @@ namespace OrangeBranchTaskManager.Api.Controllers
             ITokenServiceUseCase tokenService,
             IConfiguration configuration,
             UserManager<UserModel> userManager,
-            RoleManager<IdentityRole> roleManager,
             IRabbitMQConnectionManager connectionManager
         )
         {

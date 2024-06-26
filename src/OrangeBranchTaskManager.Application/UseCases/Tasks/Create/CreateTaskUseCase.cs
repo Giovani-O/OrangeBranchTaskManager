@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OrangeBranchTaskManager.Application.UseCases.CurrentUser;
 using OrangeBranchTaskManager.Application.UseCases.SendMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Communication.Templates;
@@ -17,16 +18,19 @@ public class CreateTaskUseCase
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly IRabbitMQConnectionManager _connectionManager;
+    private readonly ICurrentUserService _currentUserService;
 
     public CreateTaskUseCase(
         IUnitOfWork unitOfWork,
         IMapper mapper,
-        IRabbitMQConnectionManager connectionManager
+        IRabbitMQConnectionManager connectionManager,
+        ICurrentUserService currentUserService
     )
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _connectionManager = connectionManager;
+        _currentUserService = currentUserService;
     }
 
     public async Task<TaskDTO> Execute(TaskDTO taskData)
@@ -73,7 +77,7 @@ public class CreateTaskUseCase
         var messageInfo = new EmailTemplate
         {
             NotificationType = Domain.Enums.NotificationType.NewTask,
-            Username = "",
+            Username = _currentUserService.GetUsername(),
             TaskTitle = task.Title,
             TaskDescription = task.Description,
             TaskDeadline = task.DueDate,
