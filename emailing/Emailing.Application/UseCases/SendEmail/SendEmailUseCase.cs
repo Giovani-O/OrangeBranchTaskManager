@@ -8,6 +8,7 @@ namespace Emailing.Application.UseCases.SendEmail;
 
 public class SendEmailUseCase : ISendEmailUseCase
 {
+
     private readonly ISMPTConfig _smtpConfig;
 
     public SendEmailUseCase(ISMPTConfig smtpConfig)
@@ -15,7 +16,7 @@ public class SendEmailUseCase : ISendEmailUseCase
         _smtpConfig = smtpConfig;
     }
 
-    public void Execute(string message)
+    public async Task Execute(string message)
     {
         var emailInfo = JsonSerializer.Deserialize<EmailTemplate>(message);
 
@@ -24,47 +25,48 @@ public class SendEmailUseCase : ISendEmailUseCase
         switch (emailInfo.NotificationType)
         {
             case NotificationTypes.NewUser:
-                SendNewUserEmail(emailInfo);
+                await SendNewUserEmail(emailInfo);
                 break;
             case NotificationTypes.NewTask:
-                SendNewTaskEmail(emailInfo);
+                await SendNewTaskEmail(emailInfo);
                 break;
             case NotificationTypes.UpdatedTask:
-                SendUpdatedTaskEmail(emailInfo);
+                await SendUpdatedTaskEmail(emailInfo);
                 break;
             case NotificationTypes.DeletedTask:
-                SendDeletedTaskEmail(emailInfo);
+                await SendDeletedTaskEmail(emailInfo);
                 break;
             default:
                 throw new ArgumentException("Notificação desconhecida");
         }
     }
 
-    private void SendNewUserEmail(EmailTemplate emailInfo)
+    private async Task SendNewUserEmail(EmailTemplate emailInfo)
     {
-        _smtpConfig.SendEmail(emailInfo.Email, "[Orange Tasks] Bem Vindo(a)!", "Email automático, não responda.");
+        await _smtpConfig.SendEmailAsync(emailInfo.Email, "[Orange Tasks] Bem Vindo(a)!", "Email automático, não responda.");
 
         Console.WriteLine("Novo usuário criado!");
     }
 
-    private void SendNewTaskEmail(EmailTemplate emailInfo)
+    private async Task SendNewTaskEmail(EmailTemplate emailInfo)
     {
-        _smtpConfig.SendEmail(emailInfo.Email, "[Orange Tasks] Nova Tarefa!", "Email automático, não responda.");
+        await _smtpConfig.SendEmailAsync(emailInfo.Email, "[Orange Tasks] Nova Tarefa!", "Email automático, não responda.");
 
         Console.WriteLine("Nova tarefa criada!");
     }
 
-    private void SendUpdatedTaskEmail(EmailTemplate emailInfo)
+    private async Task SendUpdatedTaskEmail(EmailTemplate emailInfo)
     {
-        _smtpConfig.SendEmail(emailInfo.Email, "[Orange Tasks] Tarefa Atualizada!", "Email automático, não responda.");
+        await _smtpConfig.SendEmailAsync(emailInfo.Email, "[Orange Tasks] Tarefa Atualizada!", "Email automático, não responda.");
 
         Console.WriteLine("Uma tarefa foi atualizada!");
     }
 
-    private void SendDeletedTaskEmail(EmailTemplate emailInfo)
+    private async Task SendDeletedTaskEmail(EmailTemplate emailInfo)
     {
-        _smtpConfig.SendEmail(emailInfo.Email, "[Orange Tasks] Tarefa Excluída!", "Email automático, não responda.");
+        await _smtpConfig.SendEmailAsync(emailInfo.Email, "[Orange Tasks] Tarefa Excluída!", "Email automático, não responda.");
 
         Console.WriteLine("Uma tarefa foi excluída!");
     }
+
 }

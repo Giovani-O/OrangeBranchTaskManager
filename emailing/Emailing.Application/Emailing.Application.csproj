@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Emailing.Communication\Emailing.Communication.csproj" />
-    <ProjectReference Include="..\Emailing.Domain\Emailing.Domain.csproj" />
+    <Compile Remove="UseCases\NewFolder\**" />
+    <EmbeddedResource Remove="UseCases\NewFolder\**" />
+    <None Remove="UseCases\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\NewFolder\" />
+    <ProjectReference Include="..\Emailing.Communication\Emailing.Communication.csproj" />
+    <ProjectReference Include="..\Emailing.Domain\Emailing.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

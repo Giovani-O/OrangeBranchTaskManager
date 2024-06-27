@@ -18,23 +18,27 @@ public class SMTPConfig : ISMPTConfig
         //_senderEmail = configuration["EmailServer:SenderEmail"]!;
         //_senderPassword = configuration["EmailServer:SenderPassword"]!;
         _smtpServer = "smtp.gmail.com";
-        _port = 465;
-        _senderEmail = "tasksorange@gmail.com";
-        _senderPassword = "SMTPPassword123!";
+        _port = 587;
+        _senderEmail = "";
+        _senderPassword = "";
     }
 
     // WiP - There is an error while sending the email
-    public void SendEmail(string recipient, string subject, string body)
+    public async Task SendEmailAsync(string recipient, string subject, string body)
     {
-        using (var client = new SmtpClient(_smtpServer, _port))
+        var client = new SmtpClient(_smtpServer, _port)
         {
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential(_senderEmail, _senderPassword);
+            EnableSsl = true,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(_senderEmail, _senderPassword)
+        };
 
-            var message = new MailMessage(_senderEmail, recipient, subject, body);
-            message.IsBodyHtml = true;
-
-            client.Send(message);
-        }
+        await client.SendMailAsync(
+            new MailMessage(
+                    from: _senderEmail,
+                    to: recipient,
+                    subject,
+                    body
+                ));
     }
 }
