@@ -64,7 +64,7 @@ public class RegisterUseCase
             }
         );
 
-        await SendMessage(registerData.Username);
+        await SendMessage(registerData.Username, registerData.Email);
 
         return result;
     }
@@ -86,12 +86,13 @@ public class RegisterUseCase
         }
     }
 
-    private async Task SendMessage(string username)
+    private async Task SendMessage(string username, string email)
     {
         var messageInfo = new EmailTemplate 
         { 
             NotificationType = Domain.Enums.NotificationType.NewUser,
             Username = username,
+            Email = email,
         };
 
         var messageJson = JsonSerializer.Serialize(messageInfo);

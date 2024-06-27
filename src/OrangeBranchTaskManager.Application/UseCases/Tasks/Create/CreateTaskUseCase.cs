@@ -78,6 +78,7 @@ public class CreateTaskUseCase
         {
             NotificationType = Domain.Enums.NotificationType.NewTask,
             Username = _currentUserService.GetUsername(),
+            Email = _currentUserService.GetEmail(),
             TaskTitle = task.Title,
             TaskDescription = task.Description,
             TaskDeadline = task.DueDate,

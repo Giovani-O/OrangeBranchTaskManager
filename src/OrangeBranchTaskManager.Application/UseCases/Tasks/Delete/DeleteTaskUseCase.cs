@@ -75,6 +75,7 @@ public class DeleteTaskUseCase
         {
             NotificationType = Domain.Enums.NotificationType.DeletedTask,
             Username = _currentUserService.GetUsername(),
+            Email = _currentUserService.GetEmail(),
             TaskTitle = taskTitle
         };
 

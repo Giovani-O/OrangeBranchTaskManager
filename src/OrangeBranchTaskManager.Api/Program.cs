@@ -1,23 +1,11 @@
-using Microsoft.AspNetCore.Authentication.Certificate;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OrangeBranchTaskManager.Api.Controllers.Mappings;
 using OrangeBranchTaskManager.Api.Filters;
 using OrangeBranchTaskManager.Api.Middlewares;
 using OrangeBranchTaskManager.Application.UseCases.CurrentUser;
 using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
-using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
-using OrangeBranchTaskManager.Domain.Repositories.Tasks;
-using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Infrastructure;
-using OrangeBranchTaskManager.Infrastructure.Context;
-using OrangeBranchTaskManager.Infrastructure.Repositories.Task;
-using OrangeBranchTaskManager.Infrastructure.UnitOfWork;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 

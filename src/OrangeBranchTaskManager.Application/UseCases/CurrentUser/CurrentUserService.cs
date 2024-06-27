@@ -20,4 +20,13 @@ public class CurrentUserService : ICurrentUserService
 
         return string.Empty;
     }
+
+    public string GetEmail()
+    {
+        var user = _contextAccessor.HttpContext?.User;
+        if (user?.Identity?.IsAuthenticated == true)
+            return user.FindFirstValue(ClaimTypes.Email);
+
+        return string.Empty;
+    }
 }

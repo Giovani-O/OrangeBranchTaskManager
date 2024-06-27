@@ -84,6 +84,7 @@ public class UpdateTaskUseCase
         {
             NotificationType = Domain.Enums.NotificationType.UpdatedTask,
             Username = _currentUserService.GetUsername(),
+            Email = _currentUserService.GetEmail(),
             TaskTitle = task.Title,
             TaskDescription = task.Description,
             TaskDeadline = task.DueDate,
