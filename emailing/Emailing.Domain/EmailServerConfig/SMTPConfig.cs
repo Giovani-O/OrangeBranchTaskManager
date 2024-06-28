@@ -37,11 +37,10 @@ public class SMTPConfig : ISMPTConfig
         };
 
         await client.SendMailAsync(
-            new MailMessage(
-                    from: _senderEmail,
-                    to: recipient,
-                    subject,
-                    body
-                ));
+            new MailMessage(_senderEmail, recipient, subject, body)
+            {
+                IsBodyHtml = true
+            }
+        );
     }
 }
