@@ -25,12 +25,12 @@ public class ConsumeMessageUseCase : IConsumeMessageUseCase
         var channel = _connectionManager.GetChannel();
         var consumer = new EventingBasicConsumer(channel);
 
-        consumer.Received += (model, ea) =>
+        consumer.Received += async (model, ea) =>
         {
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
 
-            _sendEmail.Execute(message);
+            await _sendEmail.Execute(message);
         };
 
         channel.BasicConsume(

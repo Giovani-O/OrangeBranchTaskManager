@@ -11,19 +11,14 @@ public class SMTPConfig : ISMPTConfig
     private string _senderEmail;
     private string _senderPassword;
 
-    public SMTPConfig(/*IConfiguration configuration*/)
+    public SMTPConfig(IConfiguration configuration)
     {
-        //_smtpServer = configuration["EmailServer:SMTPServer"]!;
-        //_port = int.Parse(configuration["EmailServer:Port"]!);
-        //_senderEmail = configuration["EmailServer:SenderEmail"]!;
-        //_senderPassword = configuration["EmailServer:SenderPassword"]!;
         _smtpServer = "smtp.gmail.com";
         _port = 587;
         _senderEmail = "";
         _senderPassword = "";
     }
 
-    // WiP - There is an error while sending the email
     public async Task SendEmailAsync(string recipient, string subject, string body)
     {
         var client = new SmtpClient(_smtpServer, _port)
