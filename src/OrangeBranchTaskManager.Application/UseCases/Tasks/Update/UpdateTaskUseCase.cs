@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using OrangeBranchTaskManager.Application.UseCases.CurrentUser;
-using OrangeBranchTaskManager.Application.UseCases.SendMessage;
+using OrangeBranchTaskManager.Application.UseCases.PublishMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Communication.Templates;
 using OrangeBranchTaskManager.Domain.Entities;
@@ -92,13 +92,13 @@ public class UpdateTaskUseCase
 
         var messageJson = JsonSerializer.Serialize(messageInfo);
 
-        var message = new SendMessageDTO
+        var message = new PublishMessageDTO
         {
             Message = messageJson
         };
 
-        var sendMessageUseCase = new SendMessageUseCase(_connectionManager);
+        var publishMessageUseCase = new PublishMessageUseCase(_connectionManager);
 
-        await sendMessageUseCase.Execute(message);
+        await publishMessageUseCase.Execute(message);
     }
 }

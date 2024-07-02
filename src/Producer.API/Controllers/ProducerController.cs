@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OrangeBranchTaskManager.Application.UseCases.SendMessage;
+using OrangeBranchTaskManager.Application.UseCases.PublishMessage;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using System.Text;
@@ -17,9 +17,9 @@ public class ProducerController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> SendMessage(SendMessageDTO request)
+    public async Task<IActionResult> PublishMessage(PublishMessageDTO request)
     {
-        var useCase = new SendMessageUseCase(_connectionManager);
+        var useCase = new PublishMessageUseCase(_connectionManager);
         await useCase.Execute(request);
 
         return Ok("Mensagem enviada com sucesso!");

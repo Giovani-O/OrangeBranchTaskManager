@@ -2,16 +2,16 @@
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Exception;
 
-namespace OrangeBranchTaskManager.Application.UseCases.SendMessage;
+namespace OrangeBranchTaskManager.Application.UseCases.PublishMessage;
 
-public class SendMessageValidator : AbstractValidator<SendMessageDTO>
+public class PublishMessageValidator : AbstractValidator<PublishMessageDTO>
 {
-    public SendMessageValidator()
+    public PublishMessageValidator()
     {
         RuleFor(request => request.Message)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage(ResourceErrorMessages.ERROR_EMPTY_MESSAGE)
-            .WithName(nameof(SendMessageDTO.Message));
+            .WithName(nameof(PublishMessageDTO.Message));
     }
 }

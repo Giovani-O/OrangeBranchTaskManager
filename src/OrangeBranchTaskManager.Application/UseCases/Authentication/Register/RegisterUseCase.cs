@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using OrangeBranchTaskManager.Application.UseCases.Authentication.Login;
-using OrangeBranchTaskManager.Application.UseCases.SendMessage;
+using OrangeBranchTaskManager.Application.UseCases.PublishMessage;
 using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
@@ -97,13 +97,13 @@ public class RegisterUseCase
 
         var messageJson = JsonSerializer.Serialize(messageInfo);
 
-        var message = new SendMessageDTO
+        var message = new PublishMessageDTO
         {
             Message = messageJson
         };
 
-        var sendMessageUseCase = new SendMessageUseCase(_connectionManager);
+        var publishMessageUseCase = new PublishMessageUseCase(_connectionManager);
 
-        await sendMessageUseCase.Execute(message);
+        await publishMessageUseCase.Execute(message);
     }
 }

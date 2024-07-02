@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A5A80253-878
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CAB5E4DA-4B87-4355-995B-2EA9B1C06C2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Tests", "tests\OrangeBranchTaskManager.Tests\OrangeBranchTaskManager.Tests.csproj", "{AE6BED80-E258-47D2-B06A-A4D226577E62}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Api", "src\OrangeBranchTaskManager.Api\OrangeBranchTaskManager.Api.csproj", "{8639D9C1-21FA-47CF-AB7F-B0647050DED9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrangeBranchTaskManager.Application", "src\OrangeBranchTaskManager.Application\OrangeBranchTaskManager.Application.csproj", "{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA}"
@@ -31,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emailing.Domain", "emailing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emailing.Worker", "emailing\Emailing.Worker\Emailing.Worker.csproj", "{D5314354-9A97-4C5E-AC55-D791ECEA9C7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emailing.Communication", "emailing\Emailing.Communication\Emailing.Communication.csproj", "{364224B9-D34B-4F79-AB07-2757FCA6E5A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emailing.Communication", "emailing\Emailing.Communication\Emailing.Communication.csproj", "{364224B9-D34B-4F79-AB07-2757FCA6E5A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManaer.Application.Tests", "tests\OrangeBranchTaskManaer.Application.Tests\OrangeBranchTaskManaer.Application.Tests.csproj", "{F2FDDD99-50B0-4639-B177-09479EF0AFDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +39,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AE6BED80-E258-47D2-B06A-A4D226577E62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE6BED80-E258-47D2-B06A-A4D226577E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE6BED80-E258-47D2-B06A-A4D226577E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE6BED80-E258-47D2-B06A-A4D226577E62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8639D9C1-21FA-47CF-AB7F-B0647050DED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,12 +83,15 @@ Global
 		{364224B9-D34B-4F79-AB07-2757FCA6E5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364224B9-D34B-4F79-AB07-2757FCA6E5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364224B9-D34B-4F79-AB07-2757FCA6E5A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2FDDD99-50B0-4639-B177-09479EF0AFDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2FDDD99-50B0-4639-B177-09479EF0AFDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2FDDD99-50B0-4639-B177-09479EF0AFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2FDDD99-50B0-4639-B177-09479EF0AFDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{AE6BED80-E258-47D2-B06A-A4D226577E62} = {CAB5E4DA-4B87-4355-995B-2EA9B1C06C2A}
 		{8639D9C1-21FA-47CF-AB7F-B0647050DED9} = {A5A80253-8783-4E00-80BA-97459E523811}
 		{CB7F71AD-FF1C-45EA-958B-2691B4FD49EA} = {A5A80253-8783-4E00-80BA-97459E523811}
 		{2820C015-9474-4FEF-9314-C89C38BF9256} = {A5A80253-8783-4E00-80BA-97459E523811}
@@ -104,6 +103,7 @@ Global
 		{CB6B3FD6-9490-4C5B-9676-4E9E8005FF83} = {2E535F57-E2C7-43B7-9033-A88D3E2F9AD7}
 		{D5314354-9A97-4C5E-AC55-D791ECEA9C7D} = {2E535F57-E2C7-43B7-9033-A88D3E2F9AD7}
 		{364224B9-D34B-4F79-AB07-2757FCA6E5A0} = {2E535F57-E2C7-43B7-9033-A88D3E2F9AD7}
+		{F2FDDD99-50B0-4639-B177-09479EF0AFDC} = {CAB5E4DA-4B87-4355-995B-2EA9B1C06C2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81BC7922-9C01-4ECB-BB77-12F2CD419F91}

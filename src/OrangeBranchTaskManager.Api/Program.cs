@@ -3,6 +3,7 @@ using OrangeBranchTaskManager.Api.Controllers.Mappings;
 using OrangeBranchTaskManager.Api.Filters;
 using OrangeBranchTaskManager.Api.Middlewares;
 using OrangeBranchTaskManager.Application.UseCases.CurrentUser;
+using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Infrastructure;
@@ -47,6 +48,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
 builder.Services.AddScoped<IRabbitMQConnectionManager, RabbitMQConnectionManager>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<ISendEmailUseCase, SendEmailUseCase>();
 builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
 builder.Services.AddAuthorization(options =>
 {

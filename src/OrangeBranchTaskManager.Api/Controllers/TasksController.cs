@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrangeBranchTaskManager.Application.UseCases.CurrentUser;
+using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.Delete;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.GetAll;
@@ -22,18 +23,17 @@ namespace OrangeBranchTaskManager.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IRabbitMQConnectionManager _connectionManager;
         private readonly ICurrentUserService _currentUserService;
+        private readonly ISendEmailUseCase _sendEmailUseCase;
 
         public TasksController(
             IUnitOfWork unitOfWork, 
             IMapper mapper, 
-            IRabbitMQConnectionManager connectionManager,
-            ICurrentUserService currentUserService
+            ISendEmailUseCase sendEmailUseCase
         )
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _connectionManager = connectionManager;
-            _currentUserService = currentUserService;
+            _sendEmailUseCase = sendEmailUseCase;
         }
 
         [HttpGet]
@@ -70,7 +70,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<TaskDTO>> CreateTask(TaskDTO taskData)
         {
-            var useCase = new CreateTaskUseCase(_unitOfWork, _mapper, _connectionManager, _currentUserService);
+            var useCase = new CreateTaskUseCase(_unitOfWork, _mapper, _sendEmailUseCase);
             var response = await useCase.Execute(taskData);
 
             return Created(string.Empty, response);

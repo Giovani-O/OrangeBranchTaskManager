@@ -4,18 +4,18 @@ using OrangeBranchTaskManager.Exception.ExceptionsBase;
 using System.Threading.Tasks;
 using System.Text;
 
-namespace OrangeBranchTaskManager.Application.UseCases.SendMessage;
+namespace OrangeBranchTaskManager.Application.UseCases.PublishMessage;
 
-public class SendMessageUseCase
+public class PublishMessageUseCase
 {
     private readonly IRabbitMQConnectionManager _connectionManager;
 
-    public SendMessageUseCase(IRabbitMQConnectionManager connectionManager)
+    public PublishMessageUseCase(IRabbitMQConnectionManager connectionManager)
     {
         _connectionManager = connectionManager;
     }
 
-    public async Task Execute(SendMessageDTO request)
+    public async Task Execute(PublishMessageDTO request)
     {
         Validate(request);
 
@@ -29,9 +29,9 @@ public class SendMessageUseCase
         );
     }
 
-    private void Validate(SendMessageDTO request)
+    private void Validate(PublishMessageDTO request)
     {
-        var validator = new SendMessageValidator();
+        var validator = new PublishMessageValidator();
         var result = validator.Validate(request);
 
         if (!result.IsValid) 
