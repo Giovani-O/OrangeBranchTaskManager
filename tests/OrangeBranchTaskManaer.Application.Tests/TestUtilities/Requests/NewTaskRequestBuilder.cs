@@ -8,7 +8,7 @@ public class NewTaskRequestBuilder
     public static TaskDTO Build()
     {
         return new Faker<TaskDTO>()
-            .RuleFor(r => r.Title, faker => faker.Lorem.Word())
+            .RuleFor(r => r.Title, faker => faker.Lorem.Sentence(2))
             .RuleFor(r => r.Description, faker => faker.Lorem.Sentence(5))
             .RuleFor(r => r.DueDate, faker => faker.Date.Future());
     }
