@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 
 namespace Emailing.Domain.EmailServerConfig;

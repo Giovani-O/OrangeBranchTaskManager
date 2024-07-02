@@ -30,7 +30,7 @@ public class Worker : BackgroundService
             }
             useCase.Execute();
 
-            await Task.Delay(1000, stoppingToken);
+            await Task.Delay(5000, stoppingToken);
         }
     }
 }

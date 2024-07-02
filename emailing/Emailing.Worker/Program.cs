@@ -1,4 +1,3 @@
-using Emailing.Application.UseCases;
 using Emailing.Application.UseCases.ConsumeMessage;
 using Emailing.Application.UseCases.SendEmail;
 using Emailing.Domain.EmailServerConfig;

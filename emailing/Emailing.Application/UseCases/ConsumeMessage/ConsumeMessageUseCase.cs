@@ -1,11 +1,8 @@
 ﻿using Emailing.Application.UseCases.SendEmail;
-using Emailing.Communication.Templates;
-using Emailing.Domain.Enums;
 using Emailing.Domain.RabbitMQConnectionManager;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
-using System.Text.Json;
 
 namespace Emailing.Application.UseCases.ConsumeMessage;
 
@@ -39,5 +36,5 @@ public class ConsumeMessageUseCase : IConsumeMessageUseCase
             consumer: consumer
         );
     }
-    
+
 }

@@ -1,9 +1,7 @@
 ﻿using Emailing.Communication.Templates;
+using Emailing.Domain.EmailServerConfig;
 using Emailing.Domain.Enums;
 using System.Text.Json;
-using System.Net.Mail;
-using Emailing.Domain.EmailServerConfig;
-using System.Threading.Tasks;
 
 namespace Emailing.Application.UseCases.SendEmail;
 
