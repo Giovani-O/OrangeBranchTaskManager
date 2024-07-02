@@ -9,8 +9,9 @@ using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Domain.Repositories.Tasks;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
+using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
-namespace OrangeBranchTaskManaer.Application.Tests.UseCasesTests.Tasks;
+namespace OrangeBranchTaskManaer.Application.Tests.UseCasesTests.Tasks.Create;
 
 public class CreateTests
 {
@@ -58,5 +59,23 @@ public class CreateTests
         result.Should().NotBeNull();
         result.Should().BeOfType(typeof(TaskDTO));
         result.Id.Should().BeGreaterThan(0);
+    }
+
+    [Fact]
+    public void Should_Throw_ErrorOnExecutionException()
+    {
+        _taskRepositoryMock.Setup(repository => repository.CreateAsync(It.IsAny<TaskModel>()))
+            .Returns((TaskModel)null);
+
+        var createTask = new CreateTaskUseCase(
+            _unitOfWorkMock.Object,
+            _mapper,
+            _sendEmailUseCaseMock.Object
+        );
+        var request = NewTaskRequestBuilder.Build();
+
+        Func<Task> result = async () => await createTask.Execute(request);
+
+        result.Should().ThrowAsync<ErrorOnExecutionException>();
     }
 }
