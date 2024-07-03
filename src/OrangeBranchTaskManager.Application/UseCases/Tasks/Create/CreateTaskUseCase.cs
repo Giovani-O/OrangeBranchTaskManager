@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
-using OrangeBranchTaskManager.Application.UseCases.CurrentUser;
-using OrangeBranchTaskManager.Application.UseCases.PublishMessage;
 using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 using OrangeBranchTaskManager.Communication.DTOs;
-using OrangeBranchTaskManager.Communication.Templates;
 using OrangeBranchTaskManager.Domain.Entities;
-using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
-using System.Text.Json;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 

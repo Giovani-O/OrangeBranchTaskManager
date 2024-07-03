@@ -22,19 +22,11 @@ public class ExceptionFilter : IExceptionFilter
 
     private void HandleProjectException(ExceptionContext context)
     {
-        if (context.Exception is ErrorOnSendMessageException)
-        {
-            var ex = (ErrorOnSendMessageException)context.Exception;
-            var errorResponse = new ResponseErrorDTO(ex.Errors);
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Result = new BadRequestObjectResult(errorResponse);
-        }
-        else
-        {
-            var errorResponse = new ResponseErrorDTO(context.Exception.Message);
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Result = new BadRequestObjectResult(errorResponse);
-        }
+        var orangeBranchTaskManagerException = (OrangeBranchTaskManagerException)context.Exception;
+        var errorResponse = new ResponseErrorDTO(orangeBranchTaskManagerException.GetErrors());
+
+        context.HttpContext.Response.StatusCode = orangeBranchTaskManagerException.StatusCode;
+        context.Result = new ObjectResult(errorResponse);
     }
 
     private void ThrowUnknownError(ExceptionContext context)
