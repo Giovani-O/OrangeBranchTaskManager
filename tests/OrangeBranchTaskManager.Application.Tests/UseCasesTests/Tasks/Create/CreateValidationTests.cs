@@ -1,12 +1,12 @@
 ﻿using Bogus;
 using FluentAssertions;
 using Microsoft.VisualBasic;
-using OrangeBranchTaskManaer.Application.Tests.TestUtilities.Requests;
-using OrangeBranchTaskManaer.Application.Tests.TestUtilities.Tools;
+using OrangeBranchTaskManager.Application.Tests.TestUtilities.Requests;
+using OrangeBranchTaskManager.Application.Tests.TestUtilities.Tools;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 using OrangeBranchTaskManager.Exception;
 
-namespace OrangeBranchTaskManaer.Application.Tests.UseCasesTests.Tasks.Create;
+namespace OrangeBranchTaskManager.Application.Tests.UseCasesTests.Tasks.Create;
 
 public class CreateValidationTests
 {

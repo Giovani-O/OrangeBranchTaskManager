@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Moq;
-using OrangeBranchTaskManaer.Application.Tests.TestUtilities.Requests;
 using OrangeBranchTaskManager.Api.Controllers.Mappings;
+using OrangeBranchTaskManager.Application.Tests.TestUtilities.Requests;
 using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 using OrangeBranchTaskManager.Communication.DTOs;
@@ -11,7 +11,7 @@ using OrangeBranchTaskManager.Domain.Repositories.Tasks;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
-namespace OrangeBranchTaskManaer.Application.Tests.UseCasesTests.Tasks.Create;
+namespace OrangeBranchTaskManager.Application.Tests.UseCasesTests.Tasks.Create;
 
 public class CreateTests
 {

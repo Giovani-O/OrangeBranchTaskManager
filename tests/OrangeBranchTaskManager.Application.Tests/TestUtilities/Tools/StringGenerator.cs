@@ -1,4 +1,4 @@
-﻿namespace OrangeBranchTaskManaer.Application.Tests.TestUtilities.Tools;
+﻿namespace OrangeBranchTaskManager.Application.Tests.TestUtilities.Tools;
 
 public static class StringGenerator
 {

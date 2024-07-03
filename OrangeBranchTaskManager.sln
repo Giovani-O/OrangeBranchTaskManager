@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emailing.Worker", "emailing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emailing.Communication", "emailing\Emailing.Communication\Emailing.Communication.csproj", "{364224B9-D34B-4F79-AB07-2757FCA6E5A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManaer.Application.Tests", "tests\OrangeBranchTaskManaer.Application.Tests\OrangeBranchTaskManaer.Application.Tests.csproj", "{F2FDDD99-50B0-4639-B177-09479EF0AFDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeBranchTaskManager.Application.Tests", "tests\OrangeBranchTaskManager.Application.Tests\OrangeBranchTaskManager.Application.Tests.csproj", "{F2FDDD99-50B0-4639-B177-09479EF0AFDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

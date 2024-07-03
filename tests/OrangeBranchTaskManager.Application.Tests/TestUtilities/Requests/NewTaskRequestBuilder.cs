@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using OrangeBranchTaskManager.Communication.DTOs;
 
-namespace OrangeBranchTaskManaer.Application.Tests.TestUtilities.Requests;
+namespace OrangeBranchTaskManager.Application.Tests.TestUtilities.Requests;
 
 public class NewTaskRequestBuilder
 {
