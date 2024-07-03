@@ -18,7 +18,21 @@ public class SendEmailUseCase : ISendEmailUseCase
         _currentUserService = currentUserService;
     }
 
-    public async Task Execute(TaskDTO task)
+    private async Task Publish(EmailTemplate messageInfo)
+    {
+        var messageJson = JsonSerializer.Serialize(messageInfo);
+
+        var message = new PublishMessageDTO
+        {
+            Message = messageJson
+        };
+
+        var publishMessageUseCase = new PublishMessageUseCase(_connectionManager);
+
+        await publishMessageUseCase.Execute(message);
+    }
+    
+    public async Task CreateTaskExecute(TaskDTO task)
     {
         var messageInfo = new EmailTemplate
         {
@@ -30,15 +44,34 @@ public class SendEmailUseCase : ISendEmailUseCase
             TaskDeadline = task.DueDate,
         };
 
-        var messageJson = JsonSerializer.Serialize(messageInfo);
+        await Publish(messageInfo);
+    }
 
-        var message = new PublishMessageDTO
+    public async Task DeleteTaskExecute(string taskTitle)
+    {
+        var messageInfo = new EmailTemplate
         {
-            Message = messageJson
+            NotificationType = Domain.Enums.NotificationType.DeletedTask,
+            Username = _currentUserService.GetUsername(),
+            Email = _currentUserService.GetEmail(),
+            TaskTitle = taskTitle
         };
 
-        var sendMessageUseCase = new PublishMessageUseCase(_connectionManager);
+        await Publish(messageInfo);
+    }
 
-        await sendMessageUseCase.Execute(message);
+    public async Task UpdateTaskExecute(TaskDTO task)
+    {
+        var messageInfo = new EmailTemplate
+        {
+            NotificationType = Domain.Enums.NotificationType.UpdatedTask,
+            Username = _currentUserService.GetUsername(),
+            Email = _currentUserService.GetEmail(),
+            TaskTitle = task.Title,
+            TaskDescription = task.Description,
+            TaskDeadline = task.DueDate,
+        };
+        
+        await Publish(messageInfo);
     }
 }

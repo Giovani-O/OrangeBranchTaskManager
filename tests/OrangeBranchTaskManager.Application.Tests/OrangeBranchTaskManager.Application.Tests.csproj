@@ -39,4 +39,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="TestUtilities\Requests\DeleteTaskRequestBuilder.cs" />
+  </ItemGroup>
+
 </Project>

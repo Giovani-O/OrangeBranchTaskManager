@@ -84,7 +84,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         //[ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<TaskDTO>> UpdateTask([FromQuery] int id, TaskDTO taskData)
         {
-            var useCase = new UpdateTaskUseCase(_unitOfWork, _mapper, _connectionManager, _currentUserService);
+            var useCase = new UpdateTaskUseCase(_unitOfWork, _mapper, _sendEmailUseCase);
             var response = await useCase.Execute(id, taskData);
 
             return Ok(response);
@@ -98,7 +98,7 @@ namespace OrangeBranchTaskManager.Api.Controllers
         //[ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteTask([FromQuery] int id)
         {
-            var useCase = new DeleteTaskUseCase(_unitOfWork, _mapper, _connectionManager, _currentUserService);
+            var useCase = new DeleteTaskUseCase(_unitOfWork, _mapper, _sendEmailUseCase);
             await useCase.Execute(id);
 
             return NoContent();

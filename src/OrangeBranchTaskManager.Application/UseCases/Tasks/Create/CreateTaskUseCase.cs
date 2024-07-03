@@ -42,7 +42,7 @@ public class CreateTaskUseCase
         await _unitOfWork.CommitAsync();
         var result = _mapper.Map<TaskDTO>(addedTask);
 
-        await _sendEmailUseCase.Execute(taskData);
+        await _sendEmailUseCase.CreateTaskExecute(taskData);
 
         return result;
     }
@@ -52,13 +52,12 @@ public class CreateTaskUseCase
         var validator = new CreateTaskValidator();
         var result = validator.Validate(request);
 
-        if (!result.IsValid)
-        {
-            var errorDictionary = result.Errors
-                .GroupBy(e => e.PropertyName)
-                .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
+        if (result.IsValid) return;
+        
+        var errorDictionary = result.Errors
+            .GroupBy(e => e.PropertyName)
+            .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
 
-            throw new ErrorOnValidationException(errorDictionary);
-        }
+        throw new ErrorOnValidationException(errorDictionary);
     }
 }

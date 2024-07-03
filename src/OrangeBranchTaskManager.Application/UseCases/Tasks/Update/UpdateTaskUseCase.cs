@@ -9,6 +9,7 @@ using OrangeBranchTaskManager.Domain.UnitOfWork;
 using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
 using System.Text.Json;
+using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Update;
 
@@ -16,20 +17,17 @@ public class UpdateTaskUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    private readonly IRabbitMQConnectionManager _connectionManager;
-    private readonly ICurrentUserService _currentUserService;
+    private readonly ISendEmailUseCase _sendEmailUseCase;
 
     public UpdateTaskUseCase(
         IUnitOfWork unitOfWork, 
         IMapper mapper, 
-        IRabbitMQConnectionManager connectionManager,
-        ICurrentUserService currentUserService
+        ISendEmailUseCase sendEmailUseCase
     )
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _connectionManager = connectionManager;
-        _currentUserService = currentUserService;
+        _sendEmailUseCase = sendEmailUseCase;
     }
 
     public async Task<TaskDTO> Execute(int id, TaskDTO taskData)
@@ -58,7 +56,7 @@ public class UpdateTaskUseCase
 
         var result = _mapper.Map<TaskDTO>(existingTask);
 
-        await SendMessage(taskData);
+        await _sendEmailUseCase.UpdateTaskExecute(taskData);
 
         return result;
     }
@@ -68,37 +66,12 @@ public class UpdateTaskUseCase
         var validator = new UpdateTaskValidator();
         var result = validator.Validate(request);
 
-        if (!result.IsValid)
-        {
-            var errorDictionary = result.Errors
-                .GroupBy(e => e.PropertyName)
-                .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
+        if (result.IsValid) return;
+        
+        var errorDictionary = result.Errors
+            .GroupBy(e => e.PropertyName)
+            .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
 
-            throw new ErrorOnValidationException(errorDictionary);
-        }
-    }
-
-    private async Task SendMessage(TaskDTO task)
-    {
-        var messageInfo = new EmailTemplate
-        {
-            NotificationType = Domain.Enums.NotificationType.UpdatedTask,
-            Username = _currentUserService.GetUsername(),
-            Email = _currentUserService.GetEmail(),
-            TaskTitle = task.Title,
-            TaskDescription = task.Description,
-            TaskDeadline = task.DueDate,
-        };
-
-        var messageJson = JsonSerializer.Serialize(messageInfo);
-
-        var message = new PublishMessageDTO
-        {
-            Message = messageJson
-        };
-
-        var publishMessageUseCase = new PublishMessageUseCase(_connectionManager);
-
-        await publishMessageUseCase.Execute(message);
+        throw new ErrorOnValidationException(errorDictionary);
     }
 }

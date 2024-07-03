@@ -3,5 +3,7 @@
 namespace OrangeBranchTaskManager.Application.UseCases.SendEmail;
 public interface ISendEmailUseCase
 {
-    Task Execute(TaskDTO task);
+    Task CreateTaskExecute(TaskDTO task);
+    Task DeleteTaskExecute(string taskTitle);
+    Task UpdateTaskExecute(TaskDTO task);
 }
