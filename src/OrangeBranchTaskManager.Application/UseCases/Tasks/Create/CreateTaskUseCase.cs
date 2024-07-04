@@ -35,7 +35,7 @@ public class CreateTaskUseCase
         if (addedTask is null) throw new ErrorOnExecutionException(
             new Dictionary<string, List<string>>()
             {
-                { "Error", new List<string>() { ResourceErrorMessages.ERROR_CREATE_TASK } }
+                { ResourceErrorMessages.ERROR, new List<string>() { ResourceErrorMessages.ERROR_CREATE_TASK } }
             }
         );
 

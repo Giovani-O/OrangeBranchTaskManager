@@ -27,7 +27,7 @@ public class GetTaskByIdUseCase
             throw new ErrorOnExecutionException(
                 new Dictionary<string, List<string>>()
                 {
-                    { "Error", new List<string>() { ResourceErrorMessages.ERROR_NOT_FOUND_TASK } }
+                    { ResourceErrorMessages.ERROR, new List<string>() { ResourceErrorMessages.ERROR_NOT_FOUND_TASK } }
                 }
             );
 

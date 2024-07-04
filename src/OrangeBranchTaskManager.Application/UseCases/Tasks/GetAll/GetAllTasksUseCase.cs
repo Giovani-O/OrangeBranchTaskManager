@@ -25,7 +25,7 @@ public class GetAllTasksUseCase
             throw new ErrorOnExecutionException(
                 new Dictionary<string, List<string>>()
                 {
-                    { "Error", new List<string>() { ResourceErrorMessages.ERROR_NOT_FOUND_TASKS } }
+                    { ResourceErrorMessages.ERROR, new List<string>() { ResourceErrorMessages.ERROR_NOT_FOUND_TASKS } }
                 }
             );
 

@@ -38,7 +38,7 @@ public class DeleteTaskUseCase
         if (existingTask is null) throw new ErrorOnExecutionException(
             new Dictionary<string, List<string>>()
             {
-                { "Error", new List<string>() { ResourceErrorMessages.ERROR_DELETE_TASK } }
+                { ResourceErrorMessages.ERROR, new List<string>() { ResourceErrorMessages.ERROR_DELETE_TASK } }
             }
         );
 
