@@ -32,7 +32,6 @@ public class GetAllTests
         _taskRepositoryMock.Setup(repository => repository.GetAllAsync())
             .ReturnsAsync(tasks);
         _unitOfWorkMock.Setup(uow => uow.TaskRepository).Returns(_taskRepositoryMock.Object);
-        _unitOfWorkMock.Setup(uow => uow.CommitAsync()).Returns(Task.CompletedTask);
 
         var mapperConfig = new MapperConfiguration(
             config =>
