@@ -9,6 +9,7 @@ using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Domain.Repositories.Tasks;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
+using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.Tests.UseCasesTests.Tasks.Delete;
@@ -79,6 +80,10 @@ public class DeleteTests
 
         Func<Task> result = async () => await deleteTask.Execute(request);
         
-        await result.Should().ThrowAsync<ErrorOnExecutionException>();
+        var exception = await result.Should().ThrowAsync<ErrorOnExecutionException>();
+        var errors = exception.Which.GetErrors();
+
+        errors.Should().ContainKey(ResourceErrorMessages.ERROR)
+            .WhoseValue.Should().Contain(ResourceErrorMessages.ERROR_DELETE_TASK);
     }
 }

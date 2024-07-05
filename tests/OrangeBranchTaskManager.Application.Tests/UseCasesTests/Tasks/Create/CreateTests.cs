@@ -9,6 +9,7 @@ using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
 using OrangeBranchTaskManager.Domain.Repositories.Tasks;
 using OrangeBranchTaskManager.Domain.UnitOfWork;
+using OrangeBranchTaskManager.Exception;
 using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.Tests.UseCasesTests.Tasks.Create;
@@ -62,7 +63,7 @@ public class CreateTests
     }
 
     [Fact]
-    public void Should_Throw_ErrorOnExecutionException()
+    public async Task Should_Throw_ErrorOnExecutionException()
     {
         _taskRepositoryMock.Setup(repository => repository.CreateAsync(It.IsAny<TaskModel>()))
             .Returns((TaskModel)null);
@@ -76,6 +77,10 @@ public class CreateTests
 
         Func<Task> result = async () => await createTask.Execute(request);
 
-        result.Should().ThrowAsync<ErrorOnExecutionException>();
+        var exception = await result.Should().ThrowAsync<ErrorOnExecutionException>();
+        var errors = exception.Which.GetErrors();
+
+        errors.Should().ContainKey(ResourceErrorMessages.ERROR)
+            .WhoseValue.Should().Contain(ResourceErrorMessages.ERROR_CREATE_TASK);
     }
 }
