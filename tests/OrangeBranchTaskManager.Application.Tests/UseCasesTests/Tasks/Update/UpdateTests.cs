@@ -80,7 +80,7 @@ public class UpdateTests
     public async Task Should_Throw_Exception_On_Task_Not_Found()
     {
         _taskRepositoryMock.Setup(repository => repository.GetByIdAsync(It.IsAny<int>()))!
-            .ReturnsAsync((TaskModel)null);
+            .ReturnsAsync((TaskModel)null!);
         
         var updateTask = new UpdateTaskUseCase(
             _unitOfWorkMock.Object, 

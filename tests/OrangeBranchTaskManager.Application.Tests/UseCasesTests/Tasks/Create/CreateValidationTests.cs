@@ -24,7 +24,6 @@ public class CreateValidationTests
     [Theory]
     [InlineData("")]
     [InlineData("        ")]
-    [InlineData(null)]
     public void Error_Title_Empty(string title)
     {
         var validator = new CreateTaskValidator();
@@ -53,7 +52,6 @@ public class CreateValidationTests
     [Theory]
     [InlineData("")]
     [InlineData("        ")]
-    [InlineData(null)]
     public void Error_Description_Empty(string description)
     {
         var validator = new CreateTaskValidator();

@@ -66,7 +66,7 @@ public class CreateTests
     public async Task Should_Throw_ErrorOnExecutionException()
     {
         _taskRepositoryMock.Setup(repository => repository.CreateAsync(It.IsAny<TaskModel>()))
-            .Returns((TaskModel)null);
+            .Returns((TaskModel)null!);
 
         var createTask = new CreateTaskUseCase(
             _unitOfWorkMock.Object,

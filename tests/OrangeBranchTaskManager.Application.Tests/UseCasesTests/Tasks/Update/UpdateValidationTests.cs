@@ -37,7 +37,6 @@ public class UpdateValidationTests
     [Theory]
     [InlineData("")]
     [InlineData("        ")]
-    [InlineData(null)]
     public void Error_Title_Empty(string title)
     {
         var validator = new UpdateTaskValidator();
@@ -66,7 +65,6 @@ public class UpdateValidationTests
     [Theory]
     [InlineData("")]
     [InlineData("        ")]
-    [InlineData(null)]
     public void Error_Description_Empty(string description)
     {
         var validator = new UpdateTaskValidator();

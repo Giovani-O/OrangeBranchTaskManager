@@ -17,8 +17,8 @@ internal class AppDbContext : IdentityDbContext<IdentityUser>
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     { }
     
-    public virtual DbSet<TaskModel> Tasks { get; set; }
-    public virtual DbSet<UserModel> Users { get; set; }
+    public DbSet<TaskModel> Tasks { get; set; }
+    public new DbSet<UserModel> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

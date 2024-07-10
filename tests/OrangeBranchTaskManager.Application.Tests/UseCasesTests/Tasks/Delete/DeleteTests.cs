@@ -69,7 +69,7 @@ public class DeleteTests
     public async Task Should_Throw_ErrorOnExecutionException()
     {
         _taskRepositoryMock.Setup(repository => repository.GetByIdAsync(It.IsAny<int>()))!
-            .ReturnsAsync((TaskModel)null);
+            .ReturnsAsync((TaskModel)null!);
         
         var deleteTask = new DeleteTaskUseCase(
             _unitOfWorkMock.Object, 

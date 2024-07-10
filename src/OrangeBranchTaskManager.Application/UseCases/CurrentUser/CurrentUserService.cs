@@ -12,7 +12,7 @@ public class CurrentUserService : ICurrentUserService
         _contextAccessor = contextAccessor;
     }
 
-    public string GetUsername()
+    public string? GetUsername()
     {
         var user = _contextAccessor.HttpContext?.User;
         if (user?.Identity?.IsAuthenticated == true)
@@ -21,7 +21,7 @@ public class CurrentUserService : ICurrentUserService
         return string.Empty;
     }
 
-    public string GetEmail()
+    public string? GetEmail()
     {
         var user = _contextAccessor.HttpContext?.User;
         if (user?.Identity?.IsAuthenticated == true)

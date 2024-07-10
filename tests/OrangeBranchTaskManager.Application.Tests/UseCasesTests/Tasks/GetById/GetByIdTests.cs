@@ -55,7 +55,7 @@ public class GetByIdTests
     public async Task Should_Throw_Exception_On_Task_Not_Found()
     {
         _taskRepositoryMock.Setup(repository => repository.GetByIdAsync(It.IsAny<int>()))!
-            .ReturnsAsync((TaskModel)null);
+            .ReturnsAsync((TaskModel)null!);
         
         var getById = new GetTaskByIdUseCase(_unitOfWorkMock.Object, _mapper);
         var faker = new Faker();

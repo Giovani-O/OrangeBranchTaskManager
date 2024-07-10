@@ -21,8 +21,6 @@ namespace OrangeBranchTaskManager.Api.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IRabbitMQConnectionManager _connectionManager;
-        private readonly ICurrentUserService _currentUserService;
         private readonly ISendEmailUseCase _sendEmailUseCase;
 
         public TasksController(
