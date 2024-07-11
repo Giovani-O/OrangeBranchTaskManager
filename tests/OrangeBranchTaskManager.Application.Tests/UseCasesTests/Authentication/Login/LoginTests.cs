@@ -23,17 +23,13 @@ public class LoginTests
         _tokenServiceMock = new Mock<ITokenServiceUseCase>();
         _configurationMock = new Mock<IConfiguration>();
         _userManagerMock = new Mock<UserManager<UserModel>>(
-            Mock.Of<IUserStore<UserModel>>(), null, null, null, null, null, null, null, null);
+            Mock.Of<IUserStore<UserModel>>(), null!, null!, null!, null!, null!, null!, null!, null!);
         
         // Setup de _tokenServiceMock.Execute
         _tokenServiceMock.Setup(service => service.Execute(
                 It.IsAny<IEnumerable<Claim>>(), 
                 It.IsAny<IConfiguration>()))
             .Returns(new JwtSecurityToken());
-        
-        // Setup de _userManagerMock.FindByEmailAsync
-        _userManagerMock.Setup(manager => manager.FindByEmailAsync(It.IsAny<String>()))
-            .ReturnsAsync((UserModel)null!);
         
         // Setup de FindByEmailAsync
         _userManagerMock.Setup(manager => manager.FindByEmailAsync(It.IsAny<String>()))
@@ -64,5 +60,6 @@ public class LoginTests
         
         result.Should().NotBeNull();
         result.Should().BeOfType(typeof(LoginResponseDTO));
+        result.Token.Should().NotBeNull();
     }
 }
