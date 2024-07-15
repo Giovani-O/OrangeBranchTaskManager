@@ -60,7 +60,7 @@ public class RegisterUseCase
         if (!result.Succeeded) throw new ErrorOnExecutionException(
             new Dictionary<string, List<string>>()
             {
-                { "Error", new List<string> { ResourceErrorMessages.ERROR_CREATE_USER } }
+                { ResourceErrorMessages.ERROR, new List<string> { ResourceErrorMessages.ERROR_CREATE_USER } }
             }
         );
 

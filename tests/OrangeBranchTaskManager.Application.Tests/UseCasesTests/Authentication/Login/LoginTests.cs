@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using AutoMapper;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,8 @@ using OrangeBranchTaskManager.Application.UseCases.Authentication.Login;
 using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
+using OrangeBranchTaskManager.Exception;
+using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.Tests.UseCasesTests.Authentication.Login;
 
@@ -61,5 +64,49 @@ public class LoginTests
         result.Should().NotBeNull();
         result.Should().BeOfType(typeof(LoginResponseDTO));
         result.Token.Should().NotBeNull();
+    }
+
+    [Fact]
+    public async Task Should_Throw_Error_If_User_Not_Found()
+    {
+        _userManagerMock.Setup(manager => manager.FindByEmailAsync(It.IsAny<String>()))
+            .ReturnsAsync((UserModel)null!);
+        
+        var useCase = new LoginUseCase(
+            _tokenServiceMock.Object, 
+            _configurationMock.Object, 
+            _userManagerMock.Object);
+        var request = LoginRequestBuilder.Build();
+        
+        Func<Task> result = () => useCase.Execute(request);
+
+        var exception = await result.Should().ThrowAsync<ErrorOnExecutionException>();
+        var errors = exception.Which.GetErrors();
+
+        errors.Should().ContainKey(nameof(LoginDTO.Email))
+            .WhoseValue.Should().Contain(ResourceErrorMessages.ERROR_NOT_FOUND_USER);
+    }
+
+    [Fact]
+    public async Task Should_Throw_Error_If_Invalid_Password()
+    {
+        _userManagerMock.Setup(manager => manager.CheckPasswordAsync(
+                It.IsAny<UserModel>(), 
+                It.IsAny<String>()))
+            .ReturnsAsync(false);
+        
+        var useCase = new LoginUseCase(
+            _tokenServiceMock.Object, 
+            _configurationMock.Object, 
+            _userManagerMock.Object);
+        var request = LoginRequestBuilder.Build();
+        
+        Func<Task> result = () => useCase.Execute(request);
+
+        var exception = await result.Should().ThrowAsync<ErrorOnExecutionException>();
+        var errors = exception.Which.GetErrors();
+
+        errors.Should().ContainKey(nameof(LoginDTO.Password))
+            .WhoseValue.Should().Contain(ResourceErrorMessages.ERROR_INVALID_PASSWORD);
     }
 }
