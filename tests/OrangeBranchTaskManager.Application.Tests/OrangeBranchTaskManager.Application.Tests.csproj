@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <Compile Remove="TestUtilities\Requests\DeleteTaskRequestBuilder.cs" />
+    <Compile Remove="UseCasesTests\CurrentUserTests\CurrentUserValidationTests.cs" />
   </ItemGroup>
 
 </Project>

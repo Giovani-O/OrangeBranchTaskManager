@@ -15,35 +15,31 @@ public class TokenServiceUnitTests
 {
     private readonly Mock<IConfiguration> _configurationMock;
     private readonly Mock<IConfigurationSection> _keySectionMock;
-    private readonly Mock<IConfigurationSection> _tokenValidityInMinutesSectionMock;
-    private readonly Mock<IConfigurationSection> _validAudienceSectionMock;
-    private readonly Mock<IConfigurationSection> _validIssuerSectionMock;
-    private readonly Mock<IConfigurationSection> _jwtSectionMock;
 
     public TokenServiceUnitTests()
     {
         // Inicia mocks
         _configurationMock = new Mock<IConfiguration>();
         _keySectionMock = new Mock<IConfigurationSection>(); 
-        _tokenValidityInMinutesSectionMock = new Mock<IConfigurationSection>();
-        _validAudienceSectionMock = new Mock<IConfigurationSection>();
-        _validIssuerSectionMock = new Mock<IConfigurationSection>();
-        _jwtSectionMock = new Mock<IConfigurationSection>();
+        Mock<IConfigurationSection> tokenValidityInMinutesSectionMock = new();
+        Mock<IConfigurationSection> validAudienceSectionMock = new();
+        Mock<IConfigurationSection> validIssuerSectionMock = new();
+        Mock<IConfigurationSection> jwtSectionMock = new();
 
         // Atribui valores válidos
         _keySectionMock.Setup(config => config.Value).Returns(StringGenerator.NewString(32));
-        _tokenValidityInMinutesSectionMock.Setup(config => config.Value).Returns("60");
-        _validAudienceSectionMock.Setup(config => config.Value).Returns("AudienceMock");
-        _validIssuerSectionMock.Setup(config => config.Value).Returns("IssuerMock");
+        tokenValidityInMinutesSectionMock.Setup(config => config.Value).Returns("60");
+        validAudienceSectionMock.Setup(config => config.Value).Returns("AudienceMock");
+        validIssuerSectionMock.Setup(config => config.Value).Returns("IssuerMock");
         
         // Configura GetSection
-        _jwtSectionMock.Setup(config => config.GetSection("Key")).Returns(_keySectionMock.Object);
-        _jwtSectionMock.Setup(config => config.GetSection("TokenValidityInMinutes"))
-            .Returns(_tokenValidityInMinutesSectionMock.Object);
-        _jwtSectionMock.Setup(config => config.GetSection("ValidAudience")).Returns(_validAudienceSectionMock.Object);
-        _jwtSectionMock.Setup(config => config.GetSection("ValidIssuer")).Returns(_validIssuerSectionMock.Object);
+        jwtSectionMock.Setup(config => config.GetSection("Key")).Returns(_keySectionMock.Object);
+        jwtSectionMock.Setup(config => config.GetSection("TokenValidityInMinutes"))
+            .Returns(tokenValidityInMinutesSectionMock.Object);
+        jwtSectionMock.Setup(config => config.GetSection("ValidAudience")).Returns(validAudienceSectionMock.Object);
+        jwtSectionMock.Setup(config => config.GetSection("ValidIssuer")).Returns(validIssuerSectionMock.Object);
         
-        _configurationMock.Setup(config => config.GetSection("JWT")).Returns(_jwtSectionMock.Object);
+        _configurationMock.Setup(config => config.GetSection("JWT")).Returns(jwtSectionMock.Object);
     }
     
     [Fact]
@@ -71,11 +67,12 @@ public class TokenServiceUnitTests
         _keySectionMock.Setup(config => config.Value).Returns((string)null!);
         
         var useCase = new TokenServiceUseCase();
+        var faker = new Faker();
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, "TestUser"),
-            new Claim(ClaimTypes.Email, "test@test.com"),
-            new Claim("id", "TestUser"),
+            new Claim(ClaimTypes.Name, faker.Internet.UserName()),
+            new Claim(ClaimTypes.Email, faker.Internet.Email()),
+            new Claim("id", faker.Internet.UserName()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
