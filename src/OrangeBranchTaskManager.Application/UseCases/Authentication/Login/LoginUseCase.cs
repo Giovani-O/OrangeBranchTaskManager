@@ -9,7 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Authentication.Login;
-public class LoginUseCase
+public class LoginUseCase : ILoginUseCase
 {
     private readonly ITokenServiceUseCase _tokenService;
     private readonly IConfiguration _configuration;

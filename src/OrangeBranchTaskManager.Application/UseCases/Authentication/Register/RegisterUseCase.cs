@@ -14,7 +14,7 @@ using System.Text;
 using System.Text.Json;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Authentication.Register;
-public class RegisterUseCase
+public class RegisterUseCase : IRegisterUseCase
 {
     private readonly ITokenServiceUseCase _tokenService;
     private readonly IConfiguration _configuration;

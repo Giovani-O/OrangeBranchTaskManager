@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OrangeBranchTaskManager.Application.UseCases.PublishMessage;
 
-public class PublishMessageUseCase
+public class PublishMessageUseCase : IPublishMessageUseCase
 {
     private readonly IRabbitMQConnectionManager _connectionManager;
 
