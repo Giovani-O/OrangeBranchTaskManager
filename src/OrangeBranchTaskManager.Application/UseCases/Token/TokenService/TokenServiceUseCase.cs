@@ -4,6 +4,7 @@ using OrangeBranchTaskManager.Exception;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
 
@@ -11,8 +12,12 @@ public class TokenServiceUseCase : ITokenServiceUseCase
 {
     public JwtSecurityToken Execute(IEnumerable<Claim> claims, IConfiguration config)
     {
-        var key = config.GetSection("JWT").GetValue<string>("Key")
-                ?? throw new InvalidOperationException(ResourceErrorMessages.ERROR_INVALID_SECRET_KEY);
+        var key = config.GetSection("JWT").GetValue<string>("Key") 
+            ?? throw new ErrorOnExecutionException(
+                new Dictionary<string, List<string>>()
+                {
+                    { ResourceErrorMessages.ERROR, new List<string> { ResourceErrorMessages.ERROR_INVALID_SECRET_KEY } }
+                });
 
         var privateKey = Encoding.UTF8.GetBytes(key);
 
