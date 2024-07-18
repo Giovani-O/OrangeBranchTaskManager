@@ -13,7 +13,7 @@ using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Update;
 
-public class UpdateTaskUseCase
+public class UpdateTaskUseCase : IUpdateTaskUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;

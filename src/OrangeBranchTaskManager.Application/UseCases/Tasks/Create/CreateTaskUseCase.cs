@@ -8,7 +8,7 @@ using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Create;
 
-public class CreateTaskUseCase
+public class CreateTaskUseCase : ICreateTaskUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;

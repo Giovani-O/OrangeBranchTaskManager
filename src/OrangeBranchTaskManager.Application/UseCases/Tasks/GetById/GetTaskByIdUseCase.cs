@@ -6,7 +6,7 @@ using OrangeBranchTaskManager.Exception.ExceptionsBase;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.GetById;
 
-public class GetTaskByIdUseCase
+public class GetTaskByIdUseCase : IGetTaskByIdUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;

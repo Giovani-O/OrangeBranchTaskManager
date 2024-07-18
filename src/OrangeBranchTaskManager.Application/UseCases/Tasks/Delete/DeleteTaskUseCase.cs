@@ -13,7 +13,7 @@ using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 
 namespace OrangeBranchTaskManager.Application.UseCases.Tasks.Delete;
 
-public class DeleteTaskUseCase
+public class DeleteTaskUseCase : IDeleteTaskUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
