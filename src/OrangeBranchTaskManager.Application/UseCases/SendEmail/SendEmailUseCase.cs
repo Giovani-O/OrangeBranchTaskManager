@@ -36,15 +36,7 @@ public class SendEmailUseCase : ISendEmailUseCase
     
     public async Task DeleteTaskExecute(string taskTitle)
     {
-        if (String.IsNullOrWhiteSpace(taskTitle))
-        {
-            throw new ErrorOnValidationException(
-                new Dictionary<string, List<string>>()
-                {
-                    { ResourceErrorMessages.ERROR, new List<string>() { ResourceErrorMessages.ERROR_TITLE_EMPTY } }
-                }
-            );
-        }
+        ValidateDelete(taskTitle);
         
         var messageInfo = new EmailTemplate
         {
@@ -103,5 +95,18 @@ public class SendEmailUseCase : ISendEmailUseCase
             .ToDictionary(x => x.Key, x => x.Select(e => e.ErrorMessage).ToList());
 
         throw new ErrorOnValidationException(errorDictionary);
+    }
+
+    private void ValidateDelete(string taskTitle)
+    {
+        if (String.IsNullOrWhiteSpace(taskTitle))
+        {
+            throw new ErrorOnValidationException(
+                new Dictionary<string, List<string>>()
+                {
+                    { ResourceErrorMessages.ERROR, new List<string>() { ResourceErrorMessages.ERROR_TITLE_EMPTY } }
+                }
+            );
+        }
     }
 }
