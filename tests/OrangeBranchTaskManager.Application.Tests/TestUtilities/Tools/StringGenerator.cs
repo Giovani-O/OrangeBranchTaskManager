@@ -17,4 +17,9 @@ public static class StringGenerator
 
         return randomString;
     }
+
+    public static string NewEmail()
+    {
+        return $"{NewString(8)}@{NewString(8)}.com";
+    }
 }
