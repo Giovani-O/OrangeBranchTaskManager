@@ -30,7 +30,9 @@ public class GetAllTasksUseCase : IGetAllTasksUseCase
             );
 
         IEnumerable<TaskDTO> result = _mapper.Map<IEnumerable<TaskDTO>>(tasks);
-
+        
+        result = result.OrderBy(t => t.DueDate);
+        
         return result;
     }
 }
