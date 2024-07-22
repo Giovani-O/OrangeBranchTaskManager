@@ -7,8 +7,6 @@ using OrangeBranchTaskManager.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -43,11 +41,8 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
-// builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
 builder.Services.AddScoped<IRabbitMQConnectionManager, RabbitMQConnectionManager>();
-// builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-// builder.Services.AddScoped<ISendEmailUseCase, SendEmailUseCase>();
-// builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
