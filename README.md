@@ -3,6 +3,9 @@
 there is also a worker watching a RabbitMQ queue, this worker is responsible for sending emails when a new user signs up or a task is created,
 updated or deleted.
 
+## Frontend
+This backend is made to work together with [this frontend](https://github.com/Giovani-O/orange-branch-task-manager-react).
+
 ## How to run
 There are a few steps you need to follow in order to execute the API and the worker.
 First, you need [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0), [RabbitMQ](https://www.rabbitmq.com/docs/download) and [MySQL 8.0.38](https://dev.mysql.com/downloads/mysql/8.0.html).
