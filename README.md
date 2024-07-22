@@ -5,6 +5,7 @@ updated or deleted.
 
 ## Frontend
 This backend is made to work together with [this frontend](https://github.com/Giovani-O/orange-branch-task-manager-react).
+![Screen Shot 2024-07-22 at 14 26 27](https://github.com/user-attachments/assets/36cbb07d-f3ad-4979-b33e-5aa7848caf13)
 
 ## How to run
 There are a few steps you need to follow in order to execute the API and the worker.
