@@ -2,7 +2,7 @@
 using Bogus;
 using FluentAssertions;
 using Moq;
-using OrangeBranchTaskManager.Api.Controllers.Mappings;
+using OrangeBranchTaskManager.Application.Mappings;
 using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.Delete;
 using OrangeBranchTaskManager.Communication.DTOs;

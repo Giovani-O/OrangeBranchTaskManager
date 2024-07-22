@@ -1,9 +1,7 @@
-﻿using System.Diagnostics;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
 using Moq;
-using OrangeBranchTaskManager.Api.Controllers.Mappings;
-using OrangeBranchTaskManager.Application.UseCases.SendEmail;
+using OrangeBranchTaskManager.Application.Mappings;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.GetAll;
 using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;

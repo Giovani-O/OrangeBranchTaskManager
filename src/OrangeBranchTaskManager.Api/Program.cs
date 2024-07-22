@@ -1,10 +1,7 @@
 using Microsoft.OpenApi.Models;
-using OrangeBranchTaskManager.Api.Controllers.Mappings;
 using OrangeBranchTaskManager.Api.Filters;
 using OrangeBranchTaskManager.Api.Middlewares;
-using OrangeBranchTaskManager.Application.UseCases.CurrentUser;
-using OrangeBranchTaskManager.Application.UseCases.SendEmail;
-using OrangeBranchTaskManager.Application.UseCases.Token.TokenService;
+using OrangeBranchTaskManager.Application;
 using OrangeBranchTaskManager.Domain.RabbitMQConnectionManager;
 using OrangeBranchTaskManager.Infrastructure;
 
@@ -45,11 +42,12 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
+builder.Services.AddApplication();
+// builder.Services.AddScoped<ITokenServiceUseCase, TokenServiceUseCase>();
 builder.Services.AddScoped<IRabbitMQConnectionManager, RabbitMQConnectionManager>();
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-builder.Services.AddScoped<ISendEmailUseCase, SendEmailUseCase>();
-builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
+// builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+// builder.Services.AddScoped<ISendEmailUseCase, SendEmailUseCase>();
+// builder.Services.AddAutoMapper(typeof(TaskDTOMappingProfile));
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Moq;
-using OrangeBranchTaskManager.Api.Controllers.Mappings;
+using OrangeBranchTaskManager.Application.Mappings;
 using OrangeBranchTaskManager.Application.Tests.TestUtilities.Requests;
 using OrangeBranchTaskManager.Application.UseCases.SendEmail;
 using OrangeBranchTaskManager.Application.UseCases.Tasks.Create;

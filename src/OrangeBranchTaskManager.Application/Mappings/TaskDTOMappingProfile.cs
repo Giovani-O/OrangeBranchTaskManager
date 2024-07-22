@@ -3,7 +3,7 @@ using OrangeBranchTaskManager.Communication.DTOs;
 using OrangeBranchTaskManager.Domain.Entities;
 
 
-namespace OrangeBranchTaskManager.Api.Controllers.Mappings;
+namespace OrangeBranchTaskManager.Application.Mappings;
 
 public class TaskDTOMappingProfile : Profile
 {
